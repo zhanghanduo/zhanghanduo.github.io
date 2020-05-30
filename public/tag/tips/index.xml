@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tips | Zhang Handuo&#39;s Site</title>
+    <link>https://zhanghanduo.github.io/tag/tips/</link>
+      <atom:link href="https://zhanghanduo.github.io/tag/tips/index.xml" rel="self" type="application/rss+xml" />
+    <description>Tips</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 03 May 2018 10:07:29 +0800</lastBuildDate>
+    <image>
+      <url>https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Tips</title>
+      <link>https://zhanghanduo.github.io/tag/tips/</link>
+    </image>
+    
+    <item>
+      <title>CLion for catkin projects</title>
+      <link>https://zhanghanduo.github.io/post/clion/</link>
+      <pubDate>Thu, 03 May 2018 10:07:29 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/clion/</guid>
+      <description>&lt;h2 id=&#34;why-use-clion&#34;&gt;Why use CLion?&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;Better indexing and intelligence hints for C++ than Eclipse and QtCreator-desktop.&lt;/li&gt;
+&lt;li&gt;Free for students.&lt;/li&gt;
+&lt;li&gt;Also integrate PyCharm already.&lt;/li&gt;
+&lt;li&gt;Good Git integration (although I am still used to commandline git).&lt;/li&gt;
+&lt;li&gt;I really like the &lt;code&gt;code inspection clang-tidy&lt;/code&gt; function which makes the code style more modern.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;initial-set-up&#34;&gt;Initial set-up&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;Highly recommend you to add &lt;code&gt;source &amp;lt;CATKIN_WORKSPACE_DIR&amp;gt;/devel/setup.bash&lt;/code&gt; to the end of &lt;code&gt;~/.bashrc&lt;/code&gt; or &lt;code&gt;~/.zshrc&lt;/code&gt; (Depends you use bash or zsh). So when you type&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;echo $ROS_PACKAGE_PATH
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;you can find both &lt;code&gt;&amp;lt;CATKIN_WORKSPACE_DIR&amp;gt;/src&lt;/code&gt; and &lt;code&gt;/opt/ros/&amp;lt;ROS_DIST&amp;gt;/share&lt;/code&gt;. So next time you open any terminal, your cmakelist can find the package of &lt;code&gt;catkin&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;method-1-launch-clion-via-terminal&#34;&gt;Method 1: Launch CLion via terminal&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sh &amp;lt;CLION_INSTALL_DIR&amp;gt;/bin/clion.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Recommend you to make alias for this command in &lt;code&gt;~/.bashrc&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;method-2-launch-clion-via-app-icon-on-sidebar&#34;&gt;Method 2: Launch CLion via app icon on sidebar&lt;/h3&gt;
+&lt;p&gt;Just edit &lt;code&gt;/usr/share/applications/jetbrains-clion.desktop&lt;/code&gt;. If it does not exist, open up Clion and hit &lt;code&gt;Tools &amp;gt; Create Desktop Entry&lt;/code&gt; first. Here I give an example and if you are using &lt;code&gt;zsh&lt;/code&gt;, just change &lt;code&gt;bash&lt;/code&gt; to &lt;code&gt;zsh&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CLion
+Icon=XXX/clion-2017.2.3/bin/clion.svg
+Exec=bash -i -c &amp;quot;XXX/clion-2017.2.3/bin/clion.sh&amp;quot; %f
+Comment=The Drive to Develop
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-clion
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;settings&#34;&gt;Settings&lt;/h2&gt;
+&lt;p&gt;In CLion, you can set the &lt;code&gt;Toolchain&lt;/code&gt; dialog (including CMake, C++ compiler, gdb) so it can be consistent with your current system-level toolchain.&lt;/p&gt;
+&lt;p&gt;Also you can set the pass any envrionment variables and parameters to CMake in CLion by using the &lt;code&gt;CMake&lt;/code&gt; dialog.&lt;/p&gt;
+&lt;table&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/8dfc0acb4cc40bf7ded20489f98086d2/toolchain.png&#34; alt=&#34;tool chain setting&#34; width=&#34;100%&#34;&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/c190b9f472836b6993821df80cd27af6/cmake.png&#34; alt=&#34;Cmake setting&#34; width=&#34;100%&#34;&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr align=&#34;center&#34;&gt;
+            &lt;td&gt;C++ tool chain settings&lt;/td&gt;
+            &lt;td&gt;Cmake settings&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;CLion builds your project in &lt;code&gt;cmake-build-debug&lt;/code&gt; by default. If you want to change that, you could easily set:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-CMake&#34;&gt;set(CMAKE_RUNTIME_OUTPUT_DIRECTORY &amp;quot;my_dir&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or change the build output directory in the &lt;code&gt;CMake&lt;/code&gt; dialog as well.&lt;/p&gt;
+&lt;p&gt;In addition, the &lt;code&gt;Run/Debug&lt;/code&gt; Configurations dialog in the right up corner allows you to set program execution arguments, working directory, and environment variables.&lt;/p&gt;
+&lt;table&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/a51009514844b403224fee6e25f056ea/menu_setting.png&#34; alt=&#34;open debug &amp; run setting&#34; width=&#34;60%&#34;&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/843d191d2e1d8fdef1a15b6aa0b11059/debug_setting.png&#34; alt=&#34;modify execution argument&#34; width=&#34;100%&#34;&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr align=&#34;center&#34;&gt;
+            &lt;td&gt;open debug &amp; run setting&lt;/td&gt;
+            &lt;td&gt;modify execution arguments&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Now try to build &amp;amp; run your ROS project! I hope this could provide you with better experience on project development.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SVO相关问题</title>
+      <link>https://zhanghanduo.github.io/post/questions_slam/</link>
+      <pubDate>Tue, 03 Apr 2018 18:09:01 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/questions_slam/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;ORBSLAM vs SVO&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SVO （单目）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;优点： 速度极快，100多帧，在低端计算机上也能达到实时性。追踪和建图两个线程，追踪线程和ptam或者orbslam很像，也是建立误差项，然后refine和BA，区别就是用的直接法的Image alignment而不是特征点几何位置信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;缺点：只是里程计，没有后端优化和回环检测，所以累计误差较大，而且一旦丢了就挂了，没法重定位; 而且在设计的时候针对的是俯视的无人机摄像头，对于平视的摄像机效果很差; 拥有直接法的所有缺点：怕光照变化，怕模糊，怕大运动&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;svo还有一个不是缺点的缺点，它开源的代码有好多好多坑，作者很多私货故意没有写进开源的代码里面，所以实际用的时候有很多问题，需要自己根据情况改进。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;OrbSLAM
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;优点：支持单目，双目，RGBD，是一个完整的系统，包含了里程计，特征点建图BA，回环检测三个独立线程，在i7上大概15～20hz（跟输入图像大小以及参数设置有关），精确度在近年来属于比较高的了。综合能力最强。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;缺点：ORB的提取以及match耗时较大，过快的旋转可能会丢失。而且因为三个线程会给CPU带来较大负担，基本没办法再跑其他大型算法了。对于场景特征点丰富要求高，某些场景如果没什么特征可能就会失败或者不准确。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;能够跟orbslam pk的是比较新的DSO算法，SVO除了速度基本各个方面被吊打。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Depth acquirement&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;先说svo的深度滤波器，属于渐进式的三维重建，不是单纯的求取keypoint的深度，而是要维护候选点seed的深度分布，从未知到粗略到收敛，收敛了才放到地图中共追踪线程使用。实际上收敛较慢，结果严重依赖于准确的位姿估计，因此相比于特征点法的BA没有什么优势。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;2）再说orbslam的BA，相比来说计算量更大，但是因为是frame-frame以及local map的两次优化，精确度应该高于svo的滤波器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;灰度不变性假设&lt;/p&gt;
+&lt;p&gt;灰度值不变是很强的假设。如果相机是自动曝光的，当它调整曝光参数时，会使得图像整体变亮或变暗。光照变化时也会出现这种情况。特征点法对光照具有一定的容忍性，而直接法由于计算灰度间的差异，整体灰度变化会破坏灰度不变假设，使算法失败。&lt;/p&gt;
+&lt;p&gt;svo不直接取某一个像素，而是4x4的patch，我们对多个点进行最小化光度误差来计算的。所以没有明确的threshold，如果某一两个点光照发生变化还好，少数服从多数。如果发生微小变化了，但是只要选取的特征区域的光照跟其他区域区别很大，也是可以忍受的，毕竟最小化而不强求光照的误差为0。所以说有一定的鲁棒性，虽然跟特征点法没法比。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;VO静止的时候，会漂吗&lt;/p&gt;
+&lt;p&gt;一般情况下VO一般不会漂的
+如果是VIO的话是有可能的，一般有几个原因:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;calibration做的不够准&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;初始化的时候摄像头尽量冲着特征点丰富的地方，并缓慢移动摄像头，充分初始化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;IMU如果质量不好也会轻微的漂，但是不严重&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

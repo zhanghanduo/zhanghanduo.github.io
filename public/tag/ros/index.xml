@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ROS | Zhang Handuo&#39;s Site</title>
+    <link>https://zhanghanduo.github.io/tag/ros/</link>
+      <atom:link href="https://zhanghanduo.github.io/tag/ros/index.xml" rel="self" type="application/rss+xml" />
+    <description>ROS</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 03 May 2018 10:07:29 +0800</lastBuildDate>
+    <image>
+      <url>https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>ROS</title>
+      <link>https://zhanghanduo.github.io/tag/ros/</link>
+    </image>
+    
+    <item>
+      <title>CLion for catkin projects</title>
+      <link>https://zhanghanduo.github.io/post/clion/</link>
+      <pubDate>Thu, 03 May 2018 10:07:29 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/clion/</guid>
+      <description>&lt;h2 id=&#34;why-use-clion&#34;&gt;Why use CLion?&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;Better indexing and intelligence hints for C++ than Eclipse and QtCreator-desktop.&lt;/li&gt;
+&lt;li&gt;Free for students.&lt;/li&gt;
+&lt;li&gt;Also integrate PyCharm already.&lt;/li&gt;
+&lt;li&gt;Good Git integration (although I am still used to commandline git).&lt;/li&gt;
+&lt;li&gt;I really like the &lt;code&gt;code inspection clang-tidy&lt;/code&gt; function which makes the code style more modern.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;initial-set-up&#34;&gt;Initial set-up&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;Highly recommend you to add &lt;code&gt;source &amp;lt;CATKIN_WORKSPACE_DIR&amp;gt;/devel/setup.bash&lt;/code&gt; to the end of &lt;code&gt;~/.bashrc&lt;/code&gt; or &lt;code&gt;~/.zshrc&lt;/code&gt; (Depends you use bash or zsh). So when you type&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;echo $ROS_PACKAGE_PATH
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;you can find both &lt;code&gt;&amp;lt;CATKIN_WORKSPACE_DIR&amp;gt;/src&lt;/code&gt; and &lt;code&gt;/opt/ros/&amp;lt;ROS_DIST&amp;gt;/share&lt;/code&gt;. So next time you open any terminal, your cmakelist can find the package of &lt;code&gt;catkin&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;method-1-launch-clion-via-terminal&#34;&gt;Method 1: Launch CLion via terminal&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sh &amp;lt;CLION_INSTALL_DIR&amp;gt;/bin/clion.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Recommend you to make alias for this command in &lt;code&gt;~/.bashrc&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;method-2-launch-clion-via-app-icon-on-sidebar&#34;&gt;Method 2: Launch CLion via app icon on sidebar&lt;/h3&gt;
+&lt;p&gt;Just edit &lt;code&gt;/usr/share/applications/jetbrains-clion.desktop&lt;/code&gt;. If it does not exist, open up Clion and hit &lt;code&gt;Tools &amp;gt; Create Desktop Entry&lt;/code&gt; first. Here I give an example and if you are using &lt;code&gt;zsh&lt;/code&gt;, just change &lt;code&gt;bash&lt;/code&gt; to &lt;code&gt;zsh&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CLion
+Icon=XXX/clion-2017.2.3/bin/clion.svg
+Exec=bash -i -c &amp;quot;XXX/clion-2017.2.3/bin/clion.sh&amp;quot; %f
+Comment=The Drive to Develop
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-clion
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;settings&#34;&gt;Settings&lt;/h2&gt;
+&lt;p&gt;In CLion, you can set the &lt;code&gt;Toolchain&lt;/code&gt; dialog (including CMake, C++ compiler, gdb) so it can be consistent with your current system-level toolchain.&lt;/p&gt;
+&lt;p&gt;Also you can set the pass any envrionment variables and parameters to CMake in CLion by using the &lt;code&gt;CMake&lt;/code&gt; dialog.&lt;/p&gt;
+&lt;table&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/8dfc0acb4cc40bf7ded20489f98086d2/toolchain.png&#34; alt=&#34;tool chain setting&#34; width=&#34;100%&#34;&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/c190b9f472836b6993821df80cd27af6/cmake.png&#34; alt=&#34;Cmake setting&#34; width=&#34;100%&#34;&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr align=&#34;center&#34;&gt;
+            &lt;td&gt;C++ tool chain settings&lt;/td&gt;
+            &lt;td&gt;Cmake settings&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;CLion builds your project in &lt;code&gt;cmake-build-debug&lt;/code&gt; by default. If you want to change that, you could easily set:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-CMake&#34;&gt;set(CMAKE_RUNTIME_OUTPUT_DIRECTORY &amp;quot;my_dir&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or change the build output directory in the &lt;code&gt;CMake&lt;/code&gt; dialog as well.&lt;/p&gt;
+&lt;p&gt;In addition, the &lt;code&gt;Run/Debug&lt;/code&gt; Configurations dialog in the right up corner allows you to set program execution arguments, working directory, and environment variables.&lt;/p&gt;
+&lt;table&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/a51009514844b403224fee6e25f056ea/menu_setting.png&#34; alt=&#34;open debug &amp; run setting&#34; width=&#34;60%&#34;&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/843d191d2e1d8fdef1a15b6aa0b11059/debug_setting.png&#34; alt=&#34;modify execution argument&#34; width=&#34;100%&#34;&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr align=&#34;center&#34;&gt;
+            &lt;td&gt;open debug &amp; run setting&lt;/td&gt;
+            &lt;td&gt;modify execution arguments&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Now try to build &amp;amp; run your ROS project! I hope this could provide you with better experience on project development.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Handuo | Zhang Handuo&#39;s Site</title>
+    <link>https://zhanghanduo.github.io/author/handuo/</link>
+      <atom:link href="https://zhanghanduo.github.io/author/handuo/index.xml" rel="self" type="application/rss+xml" />
+    <description>Handuo</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 09 Apr 2019 15:20:37 +0800</lastBuildDate>
+    <image>
+      <url>https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Handuo</title>
+      <link>https://zhanghanduo.github.io/author/handuo/</link>
+    </image>
+    
+    <item>
+      <title>How to remotely edit your project without having to use VIM</title>
+      <link>https://zhanghanduo.github.io/post/remote_edit/</link>
+      <pubDate>Tue, 09 Apr 2019 15:20:37 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/remote_edit/</guid>
+      <description>&lt;p&gt;Remotely editing your work when your server does not have public IP address and you don&amp;rsquo;t want to spend any money is not so easy. Maybe you can use Team viewer or Anydesk or even chrome remote desktop, but there are high latencies. Maybe you can use ngrok to remotely ssh to your server, you have to use vim and you are not familiar with it at all 😧. I tried to use rmate but it is not convinient to edit across different files in a folder.&lt;/p&gt;
+&lt;p&gt;I recently found an hot github repository called 
+&lt;a href=&#34;https://github.com/codercom/code-server&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code-server&lt;/a&gt; which is able to run &lt;strong&gt;VS Code&lt;/strong&gt; on a remote server, accessible through the browser. So it suddenly came to my mind that I can remotely edit any code for free as long as I have a linux/macOS environment.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s consider you understand the basic knowledge of SSH key as you are going to use it. For tutorial about how to generate SSH keys, please refer to 
+&lt;a href=&#34;https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;How to set up SSH keys&lt;/a&gt; and 
+&lt;a href=&#34;https://help.github.com/en/articles/connecting-to-github-with-ssh&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;connecting to GitHub with SSH&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Firstly you need to see whether your server has a public IP address. If yes (I know this is not common), then things are really easy and you can just follow step 1, 2 and 3; otherwise, directly go to step 0, then step 2 and 3.&lt;/p&gt;
+&lt;h2 id=&#34;step-1-ssh-connect&#34;&gt;Step 1. SSH connect&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;ssh server_username@IP_address -L 8843:localhost:8843
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;-L 8843:localhost:8843&lt;/code&gt; here is &lt;strong&gt;local port forwarding&lt;/strong&gt; which allows you to access local network resources that aren&amp;rsquo;t exposed to the Internet. The first 8843 is local port, &lt;code&gt;localhost:8843&lt;/code&gt; is the remote &lt;strong&gt;code-server&lt;/strong&gt; default port.&lt;/p&gt;
+&lt;p&gt;To see whether you can successfully links to the server. The prerequisites are 1) you installed openssh-client 2) you have generated SSH key. If not successfully, maybe you don&amp;rsquo;t have a public IP address. Then go to step 0.&lt;/p&gt;
+&lt;h2 id=&#34;step-2-download-code-server&#34;&gt;Step 2. Download code-server&lt;/h2&gt;
+&lt;p&gt;Open this page on your client browser, find the latest release of 
+&lt;a href=&#34;https://github.com/codercom/code-server/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code-server&lt;/a&gt;. Find the binary file for linux and get the downloading address. &lt;img src=&#34;https://zhanghanduo.github.io/img/codeserver/download.png&#34; alt=&#34;Download binary file&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Then in the terminal window ssh connected to the remote server, type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;wget code-server_downloading_address
+# Example:
+wget https://github.com/codercom/code-server/releases/download/1.696-vsc1.33.0/code-server1.696-vsc1.33.0-linux-x64.tar.gz
+tar -xvzf code-server1.696-vsc1.33.0-linux-x64.tar.gz
+cd code-server1.696-vsc1.33.0-linux-x64/
+sudo mv code-server /usr/local/bin/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then your &lt;strong&gt;code-server&lt;/strong&gt; will be installed!&lt;/p&gt;
+&lt;h2 id=&#34;step-3-running-code-server&#34;&gt;Step 3. Running code-server&lt;/h2&gt;
+&lt;p&gt;Go to the folder of your code waiting to be edited and type &lt;code&gt;code-server&lt;/code&gt; in the terminal window ssh connected to remote server.
+Then open your browser and type &lt;code&gt;localhost:8843&lt;/code&gt;, your workspace of VSCode will be revealed to you! The speed is satisfactory to me.&lt;/p&gt;
+&lt;h2 id=&#34;step-0-ngrok&#34;&gt;Step 0. Ngrok&lt;/h2&gt;
+&lt;p&gt;Some people will use VPS servers or cloud hosting providers like 
+&lt;a href=&#34;www.vultr.com&#34;&gt;Vultr&lt;/a&gt;, AWS and so on to pay for a public IP address. But here we just need 
+&lt;a href=&#34;www.ngrok.com&#34;&gt;Ngrok&lt;/a&gt;, a great tool that can create a tunnel from the public Internet to a port on your local machine. You can give this URL to anyone and any place without the need to pay any money!&lt;/p&gt;
+&lt;p&gt;Download ngrok onto your remote server and throw the binary file into /usr/local/bin/. Maybe need to &lt;code&gt;sudo chmod a+x ngrok&lt;/code&gt;.
+Then type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ngrok tcp 22 --region ap
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;where &amp;ndash;region refers to your region. There are four region options: us(Ohio), eu(Frankfurt), ap(Singapore), au(Sydney). If you don&amp;rsquo;t select a region, the default one is us, which might be slow if you are in Asia.&lt;/p&gt;
+&lt;p&gt;Then your screen will show something like this:
+&lt;img src=&#34;https://zhanghanduo.github.io/img/codeserver/ngrok.png&#34; alt=&#34;ngrok&#34;&gt;&lt;/p&gt;
+&lt;p&gt;There is a number after &lt;code&gt;0.tcp.ngrok.io:&lt;/code&gt; &lt;strong&gt;15707&lt;/strong&gt;. You need to remember this port number. Please keep this window on if you want to keep this tunnel open.&lt;/p&gt;
+&lt;p&gt;Then you can ssh to your remote server by copying the command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ssh hd@0.tcp.ngrok.io -p15707 -L 8443:localhost:8443
+#Or your region is ap
+ssh hd@0.tcp.ap.ngrok.io -p15707 -L 8443:localhost:8443
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install new linux environment</title>
+      <link>https://zhanghanduo.github.io/post/new_system/</link>
+      <pubDate>Mon, 29 Oct 2018 14:46:14 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/new_system/</guid>
+      <description>&lt;p&gt;When you want to install a brand new Ubuntu 16.04 system. You could try to follow this guidance.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open &lt;code&gt;Software &amp;amp; Updates&lt;/code&gt; and choose the fastest source.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Update the system:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;sudo sh -c &#39;echo &amp;quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&amp;quot; &amp;gt; /etc/apt/sources.list.d/ros-latest.list&#39;
+sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt-get update
+sudo apt-get dist-upgrade
+sudo apt-get install build-essential git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Install Nvidia driver&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt-get install nvidia-396 nvidia-settings
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Under cases you have Intel GPU also, please type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo prime-select nvidia
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;Clone the dotfile repository:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;mkdir softwares &amp;amp;&amp;amp; cd softwares
+https://github.com/zhanghanduo/dotfiles.git
+cd dotfiles
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then follow the &lt;code&gt;readme.md&lt;/code&gt; to install necessary packages and change some settings.
+Then reboot to make some settings valid.&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;Install CUDA:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo chmod a+x cuda_xxx_linux_64.run
+sudo ./cuda_xxx_linux_64.run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;add the following settings to your .zshrc or .bashrc file and &lt;strong&gt;source&lt;/strong&gt; it:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export PATH=$PATH:/usr/local/cuda/bin
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export CUDA_HOME=/usr/local/cuda
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;Install CUDNN&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;unzip the CUDNN file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; tar -xzvf cudnn-9.0-linux-x64-v7.tgz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then copy and change permissions:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+ sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+ sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;Install ROS Kinetic&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt-get install ros-kinetic-desktop-full
+sudo rosdep init
+rosdep update
+sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;add the following settings to your .zshrc file and ** source ** it:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;source /opt/ros/kinetic/setup.zsh
+source ~/.zshrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you use bash instead of zsh you need to run the following commands to set up your shell:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;source /opt/ros/kinetic/setup.bash
+source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;8&#34;&gt;
+&lt;li&gt;Instal OpenCV 3.x&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;8.1 Download
+OpenCV source codes can be downloaded in 
+&lt;a href=&#34;https://github.com/opencv/opencv/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;opencv github&lt;/a&gt;.
+OpenCV corresponding contrib can be downloaded in 
+&lt;a href=&#34;https://github.com/opencv/opencv_contrib/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;opencv_contrib github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;8.2 Prerequisites&lt;/p&gt;
+&lt;p&gt;Before you install OpenCV&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mkdir release &amp;amp;&amp;amp; cd release
+sudo apt-get build-dep -y opencv
+(Optional) sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;8.3 Cmake&lt;/p&gt;
+&lt;p&gt;For normal configure, just type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D WITH_V4L=ON -D ENABLE_CXX11=ON -D ENABLE_PRECOMPILED_HEADERS=OFF -D CMAKE_CXX_FLAGS=&#39;-std=c++11&#39; ..
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With contrib, just add: &lt;code&gt;-D OPENCV_EXTRA_MODULES_PATH=/home/hd/softwares/opencv_contrib-3.4.1/modules&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;With CUDA, just add: &lt;code&gt;-D WITH_CUDA=ON -D ENABLE_FAST_MATH=1 -D CUDA_FAST_MATH=1 -D WITH_CUBLAS=1 -D CUDA_GENERATION=Auto&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you encounter some C++ 11 errors during compiling when you install 3.4 or later, just add: &lt;code&gt;-D CMAKE_CXX_FLAGS=&#39;-std=c++11&#39; -D CUDA_NVCC_FLAGS=&#39;-std=c++11 --expt-relaxed-constexpr&#39;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;8.4 Compiling and installing&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;make -j8
+sudo make install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;8.5 Environment&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo &#39;/usr/local/lib&#39; | sudo tee -a /etc/ld.so.conf.d/opencv.conf  
+sudo ldconfig  
+printf &#39;# OpenCV\nPKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig\nexport PKG_CONFIG_PATH\n&#39; &amp;gt;&amp;gt; ~/.bashrc  
+source ~/.zshrc 
+pkg-config --modversion opencv	//check if opencv is installed and its version
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Price and spec of cloud based GPU</title>
+      <link>https://zhanghanduo.github.io/post/gpu_cloud/</link>
+      <pubDate>Mon, 29 Oct 2018 14:17:43 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/gpu_cloud/</guid>
+      <description>&lt;p&gt;I summarized several cloud based GPU services:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name of services&lt;/th&gt;
+&lt;th&gt;Specification&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Price (US$)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;AWS P2 instance&lt;/td&gt;
+&lt;td&gt;p2.xLarge&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0.9 / hour&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Azure NC6&lt;/td&gt;
+&lt;td&gt;1xK80&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0.9 / hour&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;a href=&#34;https://lambdalabs.com/service/gpu-cloud&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Lambda GPU cloud&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;8x AWS P2 instances&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0.90 / GPU/ hour&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;a href=&#34;https://ts.ntu.edu.sg/sites/hpc/Charges/Home.aspx&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;NTU HPCC&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;2 units of 1-P100 is scheduled to be ready by End of October&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0.78 / core/ hour&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>You only look once (YOLO) -- (2)</title>
+      <link>https://zhanghanduo.github.io/post/yolov2/yolo2/</link>
+      <pubDate>Mon, 20 Aug 2018 16:21:12 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/yolov2/yolo2/</guid>
+      <description>&lt;p&gt;YOLO has higher localization errors and the recall (measure how good to locate all objects) is lower, compared to SSD. YOLOv2 is the second version of the YOLO with the objective of improving the accuracy significantly while making it faster.&lt;/p&gt;
+&lt;p&gt;The backbone network architecture of YOLO v2 is as follows:
+&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo2_net.jpg&#34; alt=&#34;Yolo2 Backbone&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;1-accuracy-improvements&#34;&gt;1. Accuracy Improvements&lt;/h2&gt;
+&lt;h3 id=&#34;batch-normalization&#34;&gt;Batch Normalization&lt;/h3&gt;
+&lt;p&gt;Also removes the need of dropouts. mAP increases by 2%.&lt;/p&gt;
+&lt;h3 id=&#34;high-resolution-classifier&#34;&gt;High-resolution Classifier&lt;/h3&gt;
+&lt;p&gt;To generate predictions with shape of $7\times 7 \times 125$, we replace the final fully connected layers with a  $3\times 3$ &lt;code&gt;convolution layer&lt;/code&gt; each outputting 1024 output channels. Then we apply a final $1\times 1$ convolutional layer to convert the $7\times 7 \times 1024$ output into $7\times 7 \times 125$ and retrain it end-to-end. This makes training easier and moves mAP up by 4%.&lt;/p&gt;
+&lt;h3 id=&#34;convolution-with-anchor-boxes&#34;&gt;Convolution with Anchor Boxes&lt;/h3&gt;
+&lt;p&gt;Early training is susceptible to unstable gradients. Arbitrary guesses on the boundary boxes may result in steep gradient changes.&lt;/p&gt;
+&lt;p&gt;In real life, boudnary boxes are not arbitrary. So the author create 5 &lt;strong&gt;anchor&lt;/strong&gt; boxes with the following shapes.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/anchor_box.jpeg&#34; alt=&#34;5 anchor boxes&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Instead of directly predicting 5 arbitrary boundary boxes, we predict offsdets to each of the anchor boxes. If we &lt;strong&gt;constrain&lt;/strong&gt; the offset values, we can maintain the diversity of the predictions and have each prediction focusing on specific shape. So the initial training will be more stable.&lt;/p&gt;
+&lt;h3 id=&#34;dimension-clusters&#34;&gt;Dimension Clusters&lt;/h3&gt;
+&lt;p&gt;In many problem domains, the boundary boxes have strong patterns. For example, in the autonomous driving, the 2 most common boundary boxes will be cars and pedestrians at different distances. To identify the top-K boundary boxes that have the best coverage for the training data, we run K-means clustering on the training data to locate the centroids of the top-K clusters.&lt;/p&gt;
+&lt;p&gt;Since we are dealing with boundary boxes rather than points, we cannot use the regular spatial distance to measure datapoint distances. No surprise, we use IoU.&lt;/p&gt;
+&lt;h3 id=&#34;direct-location-prediction&#34;&gt;Direct location prediction&lt;/h3&gt;
+&lt;p&gt;We make predictions on the offsets to the anchors. Nevertheless, if it is unconstrained, our guesses will be randomized again. YOLO predicts 5 parameters (tx, ty, tw, th, and to) and applies the sigma function to constraint its possible offset range.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo2_location_predict.jpeg&#34; alt=&#34;Location prediction on anchors&#34;&gt;&lt;/p&gt;
+&lt;p&gt;With the use of k-means clustering (dimension clusters) and the improvement mentioned in this section, mAP increases 5%.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>You only look once (YOLO) -- (1)</title>
+      <link>https://zhanghanduo.github.io/post/yolo1/</link>
+      <pubDate>Mon, 20 Aug 2018 11:39:58 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/yolo1/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;You Only Look Once (YOLO)&lt;/strong&gt; is an object detection system targeted for real-time processing. There are three versions of YOLO: YOLO, YOLOv2 (and YOLO9000) and YOLOv3. For this article, we mainly focus on YOLO first stage.&lt;/p&gt;
+&lt;h2 id=&#34;1-introduction&#34;&gt;1. Introduction&lt;/h2&gt;
+&lt;p&gt;The target is to find out the bounding box (rectangular boundary frame) of all the objects in the picture and meanwhile judge the categories of them, where left top coordinate denoted by $(x,y)$, as well as the width and height of the rectangle bounding box by $(w,h)$.
+&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/intro_yolo_cat.png&#34; alt=&#34;Bounding box of a detected cat&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The challenge here is that we have unknown number of objects, so the output dimension is not fixed.&lt;/p&gt;
+&lt;h2 id=&#34;2-grid-cell&#34;&gt;2. Grid Cell&lt;/h2&gt;
+&lt;p&gt;The idea of YOLO is to output a fixed number of dimension which is big enough to contain all the objects. We crop the original picture and divide it into an $S\times S$ grid. Each grid cell predicts only &lt;strong&gt;one&lt;/strong&gt; object. For example, the red grid cell tries to predict the &amp;ldquo;dog&amp;rdquo; object whose center falls inside that grid cell.
+&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo_dog_grid.jpg&#34; alt=&#34;Each grid cell only detects one object&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Each grid cell predicts a fixed number of boundary boxes. In the next example, the yellow grid cell makes two boundary box predictions (blue boxes) to locate where the person is.
+&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo_rider_demo.jpeg&#34; alt=&#34;Each grid cell make a fixed number of boundary box guesses for the object.&#34;&gt;&lt;/p&gt;
+&lt;p&gt;For each grid cell,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;it predicts &lt;strong&gt;B&lt;/strong&gt; boundary boxes and each box has a &lt;strong&gt;box confidence score&lt;/strong&gt;,&lt;/li&gt;
+&lt;li&gt;it detects &lt;strong&gt;one&lt;/strong&gt; object only regardless of the number of boxes B,&lt;/li&gt;
+&lt;li&gt;it predicts &lt;strong&gt;C conditional class probabilities&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For example we can use $7\times 7$ grids ($S\times S$), 2 boundary boxes (&lt;strong&gt;B&lt;/strong&gt;) with 1 corresponding confidence score and 4 coordinates ($w,h,x,y$), as well as 4 classes (&lt;strong&gt;C&lt;/strong&gt;), which makes up for $1\times 14$ tensor.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo_grid2.png&#34; alt=&#34;tensor dimemsion for 1 gird cell&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;3-network-design&#34;&gt;3. Network Design&lt;/h2&gt;
+&lt;p&gt;YOLO has 24 convolutional layers followed by 2 fully connected layers (FC). Some convolution layers use $1\times 1$ reduction layers to reduce the depth of feature maps. For the last convolution layer, the output is a tensor with shape $(7,7,1024). Then tensor is flattened, and finally output $7\times 7 \times 30$ parameters (if 20 classes and 2 bboxes predictions per grid cell) through linear regression.
+&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo1_net.png&#34; alt=&#34;YOLO network architecture&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;4-loss-fuction&#34;&gt;4. Loss Fuction&lt;/h2&gt;
+&lt;p&gt;YOLO uses sum-squared error between predictions (the one with highest IoU) and ground truth to calculate loss. The loss function composes of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the &lt;strong&gt;classification loss&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;the &lt;strong&gt;localization loss&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;the &lt;strong&gt;confidence loss&lt;/strong&gt; (the objectness of the box).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;classification-loss&#34;&gt;Classification loss&lt;/h3&gt;
+&lt;p&gt;$$
+\sum_{i=0}^{S^2} \mathbf{1}_i^{obj} \cdot{ \sum _{cc\in{classes}} \left( p _{i}(cc) - \hat{p} _i(cc) \right)^2}
+$$
+where $\mathbf{1}_i^{obj} = 1$ if an object appears in cell $i$, otherwise 0;&lt;/p&gt;
+&lt;p&gt;$\hat{p} _i(cc)$ denotes the conditional class probability for class $cc$ in cell $i$.&lt;/p&gt;
+&lt;h3 id=&#34;localization-loss&#34;&gt;Localization loss&lt;/h3&gt;
+&lt;p&gt;\begin{aligned}
+\lambda _{coord} \sum _{i=0}^{S^2} \sum _{j=0}^{B} \mathbf{1} _{ij}^{obj} \left[ (x _i - \hat{x _i})^2 + (y _i - \hat{y} _i)^2 \right]  \&lt;br&gt;
++ \lambda _{coord} \sum _{i=0}^{S^2} \sum _{j=0}^{B} \mathbf{1} _{ij}^{obj} \left[ (\sqrt{w _i} - \sqrt{\hat{w} _i} )^2 + (\sqrt{h _i} - \sqrt{\hat{h} _i} )^2 \right]
+\end{aligned}&lt;/p&gt;
+&lt;p&gt;where $\mathbf{1}_{ij}^{obj} = 1$ if the $j$th boundary box in cell $i$ is responsible for detecting object, otherwise 0;&lt;/p&gt;
+&lt;p&gt;$\lambda_{coord}$ increases the weight for the loss in the boundary box coordinates.&lt;/p&gt;
+&lt;p&gt;YOLO predicts the square root of bounding box width and height in order to differentiate large and small boxes. By setting $\lambda_{coord}$ (default: 5), we put more emphasis on the boundary box accuracy.&lt;/p&gt;
+&lt;h3 id=&#34;confidence-loss&#34;&gt;Confidence loss&lt;/h3&gt;
+&lt;p&gt;If an object is detected in the box, the confidence loss is:&lt;/p&gt;
+&lt;p&gt;$$
+\sum _{i=0}^{S^2} \sum _{j=0}^{B} \mathbf{1} _{ij}^{obj} \left(  C _i - \hat{C} _i \right)^2
+$$&lt;/p&gt;
+&lt;p&gt;where $\mathbf{1}_{ij}^{obj} = 1$ if the $j$th boundary box in cell $i$ is responsible for detecting the object, otherwise 0;&lt;/p&gt;
+&lt;p&gt;$\hat{C} _i$ is the box confidence score of the box $j$ in cell $i$.&lt;/p&gt;
+&lt;p&gt;However, if an object is not detected:&lt;/p&gt;
+&lt;p&gt;$$
+\lambda _{backg} \sum _{i=0}^{S^2} \sum _{j=0}^{B} \mathbf{1} _{ij}^{backg} \left(  C _i - \hat{C} _i \right)^2
+$$&lt;/p&gt;
+&lt;p&gt;where $\mathbf{1} _{ij}^{backg} $ is the complement of $ \mathbf{1} _{ij}^{obj}$.&lt;/p&gt;
+&lt;p&gt;$\hat{C} _i$ is the box confidence score of the box $j$ in cell $i$.&lt;/p&gt;
+&lt;p&gt;$\lambda _{backg}$ weights down the loss when detecting background.&lt;/p&gt;
+&lt;p&gt;As most boxes do not contain any objects, we weight the loss down by a factor $\lambda _{backg}$ (default: 0.5) to balance the weight.&lt;/p&gt;
+&lt;h2 id=&#34;5-inference-non-maximal-suppression&#34;&gt;5. Inference: Non-maximal Suppression&lt;/h2&gt;
+&lt;p&gt;Next, we multiply all these class scores with bounding box confidence and get class scores for different boudning boxes. So output is $7\times 7\times 2 = 98$.
+&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo_grid3.png&#34; alt=&#34;class scores for each bounding box&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Then we set a threshold value of scores and sort them descendingly. Non-max supressing alogrithm is used to set score to zero for redundant boxes.&lt;/p&gt;
+&lt;p&gt;For example, dog score for bbox1 as 0.5 and bbox 2 as 0.3. We take an Intersection over Union (IOU) of these values and if the value is greater than 0.5, we will set the value for box2 as zero, otherwise continue to the next box.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CLion for catkin projects</title>
+      <link>https://zhanghanduo.github.io/post/clion/</link>
+      <pubDate>Thu, 03 May 2018 10:07:29 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/clion/</guid>
+      <description>&lt;h2 id=&#34;why-use-clion&#34;&gt;Why use CLion?&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;Better indexing and intelligence hints for C++ than Eclipse and QtCreator-desktop.&lt;/li&gt;
+&lt;li&gt;Free for students.&lt;/li&gt;
+&lt;li&gt;Also integrate PyCharm already.&lt;/li&gt;
+&lt;li&gt;Good Git integration (although I am still used to commandline git).&lt;/li&gt;
+&lt;li&gt;I really like the &lt;code&gt;code inspection clang-tidy&lt;/code&gt; function which makes the code style more modern.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;initial-set-up&#34;&gt;Initial set-up&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;Highly recommend you to add &lt;code&gt;source &amp;lt;CATKIN_WORKSPACE_DIR&amp;gt;/devel/setup.bash&lt;/code&gt; to the end of &lt;code&gt;~/.bashrc&lt;/code&gt; or &lt;code&gt;~/.zshrc&lt;/code&gt; (Depends you use bash or zsh). So when you type&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;echo $ROS_PACKAGE_PATH
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;you can find both &lt;code&gt;&amp;lt;CATKIN_WORKSPACE_DIR&amp;gt;/src&lt;/code&gt; and &lt;code&gt;/opt/ros/&amp;lt;ROS_DIST&amp;gt;/share&lt;/code&gt;. So next time you open any terminal, your cmakelist can find the package of &lt;code&gt;catkin&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;method-1-launch-clion-via-terminal&#34;&gt;Method 1: Launch CLion via terminal&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sh &amp;lt;CLION_INSTALL_DIR&amp;gt;/bin/clion.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Recommend you to make alias for this command in &lt;code&gt;~/.bashrc&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;method-2-launch-clion-via-app-icon-on-sidebar&#34;&gt;Method 2: Launch CLion via app icon on sidebar&lt;/h3&gt;
+&lt;p&gt;Just edit &lt;code&gt;/usr/share/applications/jetbrains-clion.desktop&lt;/code&gt;. If it does not exist, open up Clion and hit &lt;code&gt;Tools &amp;gt; Create Desktop Entry&lt;/code&gt; first. Here I give an example and if you are using &lt;code&gt;zsh&lt;/code&gt;, just change &lt;code&gt;bash&lt;/code&gt; to &lt;code&gt;zsh&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CLion
+Icon=XXX/clion-2017.2.3/bin/clion.svg
+Exec=bash -i -c &amp;quot;XXX/clion-2017.2.3/bin/clion.sh&amp;quot; %f
+Comment=The Drive to Develop
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-clion
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;settings&#34;&gt;Settings&lt;/h2&gt;
+&lt;p&gt;In CLion, you can set the &lt;code&gt;Toolchain&lt;/code&gt; dialog (including CMake, C++ compiler, gdb) so it can be consistent with your current system-level toolchain.&lt;/p&gt;
+&lt;p&gt;Also you can set the pass any envrionment variables and parameters to CMake in CLion by using the &lt;code&gt;CMake&lt;/code&gt; dialog.&lt;/p&gt;
+&lt;table&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/8dfc0acb4cc40bf7ded20489f98086d2/toolchain.png&#34; alt=&#34;tool chain setting&#34; width=&#34;100%&#34;&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/c190b9f472836b6993821df80cd27af6/cmake.png&#34; alt=&#34;Cmake setting&#34; width=&#34;100%&#34;&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr align=&#34;center&#34;&gt;
+            &lt;td&gt;C++ tool chain settings&lt;/td&gt;
+            &lt;td&gt;Cmake settings&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;CLion builds your project in &lt;code&gt;cmake-build-debug&lt;/code&gt; by default. If you want to change that, you could easily set:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-CMake&#34;&gt;set(CMAKE_RUNTIME_OUTPUT_DIRECTORY &amp;quot;my_dir&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or change the build output directory in the &lt;code&gt;CMake&lt;/code&gt; dialog as well.&lt;/p&gt;
+&lt;p&gt;In addition, the &lt;code&gt;Run/Debug&lt;/code&gt; Configurations dialog in the right up corner allows you to set program execution arguments, working directory, and environment variables.&lt;/p&gt;
+&lt;table&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/a51009514844b403224fee6e25f056ea/menu_setting.png&#34; alt=&#34;open debug &amp; run setting&#34; width=&#34;60%&#34;&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/843d191d2e1d8fdef1a15b6aa0b11059/debug_setting.png&#34; alt=&#34;modify execution argument&#34; width=&#34;100%&#34;&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr align=&#34;center&#34;&gt;
+            &lt;td&gt;open debug &amp; run setting&lt;/td&gt;
+            &lt;td&gt;modify execution arguments&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Now try to build &amp;amp; run your ROS project! I hope this could provide you with better experience on project development.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pooling Layer in CNN (1)</title>
+      <link>https://zhanghanduo.github.io/post/pooling/</link>
+      <pubDate>Wed, 02 May 2018 10:16:18 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/pooling/</guid>
+      <description>&lt;p&gt;Today I didn&amp;rsquo;t have the mood to continue my work on map merging of different cameras. So I read the paper from DeepMind of &lt;code&gt;Learned Deformation Stability in Convolutional Neural Networks&lt;/code&gt; recommended by 
+&lt;a href=&#34;https://wangchen.online/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Wang Chen&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;1-convolution-operation&#34;&gt;1. Convolution Operation&lt;/h2&gt;
+&lt;p&gt;Convolution operation is typically denoted with an asterisk&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;:
+$$
+s(t)=(x*w)(t)
+$$
+In Convolutional network terminology, the &lt;em&gt;x&lt;/em&gt; is referred to as the &lt;strong&gt;input&lt;/strong&gt;, and the &lt;em&gt;w&lt;/em&gt; as the &lt;strong&gt;kernel&lt;/strong&gt;. The output is sometimes referred to as the &lt;strong&gt;feature map&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Convolution leverages three ideas that help improve the ML system: &lt;strong&gt;sparse interactions&lt;/strong&gt;, &lt;strong&gt;parameter sharing&lt;/strong&gt; and &lt;strong&gt;equivariant representations&lt;/strong&gt;. Moreover, convolution provides a means for working with inputs of variable size.&lt;/p&gt;
+&lt;h4 id=&#34;--sparse-interactions&#34;&gt;- Sparse interactions&lt;/h4&gt;
+&lt;p&gt;Also called sparse connectivity or sparse weights, makes the kernel smaller than the input. By detecting small, meaningful features such as edges with kernels (tens or hundreds of pixels), we don&amp;rsquo;t need to process all the input pixels(millions), which means much fewer parameters.&lt;/p&gt;
+&lt;table&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/4c0bd1f6e4a69d35c8390362fbbca78a/sparse_connectivity.png&#34; alt=&#34;Sparse connectivity&#34; width=&#34;80%&#34;&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/bf6611fd0b7646dcc68358a173be3388/param_sharing.png&#34; alt=&#34;Parameter sharing&#34; width=&#34;100%&#34;&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr align=&#34;center&#34;&gt;
+            &lt;td&gt;Sparse connectivity&lt;/td&gt;
+            &lt;td&gt;Parameter sharing&lt;/td&gt;
+        &lt;/td&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;--parameter-sharing&#34;&gt;- Parameter sharing&lt;/h4&gt;
+&lt;p&gt;Refers to using the same parameter for more than one function in a model, so a network has &lt;strong&gt;tied weights&lt;/strong&gt;. This reduces the storage requirements of the model to &lt;em&gt;k&lt;/em&gt; parameters.&lt;/p&gt;
+&lt;h4 id=&#34;--equivariance-to-translation&#34;&gt;- Equivariance to translation&lt;/h4&gt;
+&lt;p&gt;But not to other transformations like scale or rotation change.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-pooling&#34;&gt;2. Pooling&lt;/h2&gt;
+&lt;p&gt;In all cases, pooling helps to make the representation become approximately invariant to small translations of the input. Pooling over spatial regions produces invariance to translation, but if we pool over the outputs of separately parametrized convolutions, the features can learn which transformations to become invariant to.&lt;/p&gt;
+&lt;p&gt;Because pooling summarizes the responses over a whole neighborhood, it is
+possible to use fewer pooling units than detector units, by reporting summary
+statistics for pooling regions spaced k pixels apart rather than 1 pixel apart.&lt;/p&gt;
+&lt;p&gt;This article tries to analyze the relationship between the pooling layers and deformation stability in CNN based on the paper &lt;code&gt;Learned Deformation Stability in Convolutional Neural Networks&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The paper tries to address the following questions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Does pooling have an effect on the learned deformation stability?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Is deformation stability achieved in the absence of pooling?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;How can deformation stability be achieved in the absence of pooling?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Traditional way of thinking &lt;code&gt;pooling&lt;/code&gt; layer is that it is useful in two reasons:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;By eliminating non-maximal (for &lt;em&gt;max-pooling&lt;/em&gt;), it reduces computation for upper layers.&lt;/li&gt;
+&lt;li&gt;It porvides a form of translation invariance. Imagine cascading a max-pooling layer with a convolutional layer. There are 8 directions in which one can translate the input image by a single pixel. If max-pooling is done over a $2\times2$ region, 3 out of these 8 possible configurations will produce exactly the same output at the conv layer. For $3\times3$ windows, this jumps to $\frac{5}{8}$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Then the author first defines the invariance to transformations of an input &lt;em&gt;X&lt;/em&gt; that do not affect the output &lt;em&gt;Y&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;$$
+P(Y|\tau(X))=P(Y|X) \forall \tau \in T
+$$&lt;/p&gt;
+&lt;p&gt;Then he defines the measurement of &lt;strong&gt;sensitivity to deformation&lt;/strong&gt; to evaluate this invariance.&lt;/p&gt;
+&lt;p&gt;For a representation &lt;em&gt;r&lt;/em&gt; mapping from input image to some layer of a CNN, the measurement is:&lt;/p&gt;
+&lt;p&gt;$$
+\frac{dcos(r(x), r(\tau(x))}{median(dcos(r(x), r(y)))}
+$$
+where &lt;em&gt;dcos&lt;/em&gt; is the cosine distance. That is we normalize distances by the median distance between randomly selected images from the original dataset.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Ian Goodfellow, Yoshua Bengio, and Aaron Courville, &lt;strong&gt;Deep Learning&lt;/strong&gt;, 2016. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SVO相关问题</title>
+      <link>https://zhanghanduo.github.io/post/questions_slam/</link>
+      <pubDate>Tue, 03 Apr 2018 18:09:01 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/questions_slam/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;ORBSLAM vs SVO&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SVO （单目）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;优点： 速度极快，100多帧，在低端计算机上也能达到实时性。追踪和建图两个线程，追踪线程和ptam或者orbslam很像，也是建立误差项，然后refine和BA，区别就是用的直接法的Image alignment而不是特征点几何位置信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;缺点：只是里程计，没有后端优化和回环检测，所以累计误差较大，而且一旦丢了就挂了，没法重定位; 而且在设计的时候针对的是俯视的无人机摄像头，对于平视的摄像机效果很差; 拥有直接法的所有缺点：怕光照变化，怕模糊，怕大运动&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;svo还有一个不是缺点的缺点，它开源的代码有好多好多坑，作者很多私货故意没有写进开源的代码里面，所以实际用的时候有很多问题，需要自己根据情况改进。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;OrbSLAM
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;优点：支持单目，双目，RGBD，是一个完整的系统，包含了里程计，特征点建图BA，回环检测三个独立线程，在i7上大概15～20hz（跟输入图像大小以及参数设置有关），精确度在近年来属于比较高的了。综合能力最强。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;缺点：ORB的提取以及match耗时较大，过快的旋转可能会丢失。而且因为三个线程会给CPU带来较大负担，基本没办法再跑其他大型算法了。对于场景特征点丰富要求高，某些场景如果没什么特征可能就会失败或者不准确。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;能够跟orbslam pk的是比较新的DSO算法，SVO除了速度基本各个方面被吊打。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Depth acquirement&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;先说svo的深度滤波器，属于渐进式的三维重建，不是单纯的求取keypoint的深度，而是要维护候选点seed的深度分布，从未知到粗略到收敛，收敛了才放到地图中共追踪线程使用。实际上收敛较慢，结果严重依赖于准确的位姿估计，因此相比于特征点法的BA没有什么优势。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;2）再说orbslam的BA，相比来说计算量更大，但是因为是frame-frame以及local map的两次优化，精确度应该高于svo的滤波器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;灰度不变性假设&lt;/p&gt;
+&lt;p&gt;灰度值不变是很强的假设。如果相机是自动曝光的，当它调整曝光参数时，会使得图像整体变亮或变暗。光照变化时也会出现这种情况。特征点法对光照具有一定的容忍性，而直接法由于计算灰度间的差异，整体灰度变化会破坏灰度不变假设，使算法失败。&lt;/p&gt;
+&lt;p&gt;svo不直接取某一个像素，而是4x4的patch，我们对多个点进行最小化光度误差来计算的。所以没有明确的threshold，如果某一两个点光照发生变化还好，少数服从多数。如果发生微小变化了，但是只要选取的特征区域的光照跟其他区域区别很大，也是可以忍受的，毕竟最小化而不强求光照的误差为0。所以说有一定的鲁棒性，虽然跟特征点法没法比。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;VO静止的时候，会漂吗&lt;/p&gt;
+&lt;p&gt;一般情况下VO一般不会漂的
+如果是VIO的话是有可能的，一般有几个原因:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;calibration做的不够准&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;初始化的时候摄像头尽量冲着特征点丰富的地方，并缓慢移动摄像头，充分初始化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;IMU如果质量不好也会轻微的漂，但是不严重&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Info | Zhang Handuo&#39;s Site</title>
+    <link>https://zhanghanduo.github.io/tag/info/</link>
+      <atom:link href="https://zhanghanduo.github.io/tag/info/index.xml" rel="self" type="application/rss+xml" />
+    <description>Info</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 29 Oct 2018 14:46:14 +0800</lastBuildDate>
+    <image>
+      <url>https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Info</title>
+      <link>https://zhanghanduo.github.io/tag/info/</link>
+    </image>
+    
+    <item>
+      <title>Install new linux environment</title>
+      <link>https://zhanghanduo.github.io/post/new_system/</link>
+      <pubDate>Mon, 29 Oct 2018 14:46:14 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/new_system/</guid>
+      <description>&lt;p&gt;When you want to install a brand new Ubuntu 16.04 system. You could try to follow this guidance.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open &lt;code&gt;Software &amp;amp; Updates&lt;/code&gt; and choose the fastest source.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Update the system:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;sudo sh -c &#39;echo &amp;quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&amp;quot; &amp;gt; /etc/apt/sources.list.d/ros-latest.list&#39;
+sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt-get update
+sudo apt-get dist-upgrade
+sudo apt-get install build-essential git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Install Nvidia driver&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt-get install nvidia-396 nvidia-settings
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Under cases you have Intel GPU also, please type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo prime-select nvidia
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;Clone the dotfile repository:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;mkdir softwares &amp;amp;&amp;amp; cd softwares
+https://github.com/zhanghanduo/dotfiles.git
+cd dotfiles
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then follow the &lt;code&gt;readme.md&lt;/code&gt; to install necessary packages and change some settings.
+Then reboot to make some settings valid.&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;Install CUDA:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo chmod a+x cuda_xxx_linux_64.run
+sudo ./cuda_xxx_linux_64.run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;add the following settings to your .zshrc or .bashrc file and &lt;strong&gt;source&lt;/strong&gt; it:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export PATH=$PATH:/usr/local/cuda/bin
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export CUDA_HOME=/usr/local/cuda
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;Install CUDNN&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;unzip the CUDNN file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; tar -xzvf cudnn-9.0-linux-x64-v7.tgz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then copy and change permissions:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+ sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+ sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;Install ROS Kinetic&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt-get install ros-kinetic-desktop-full
+sudo rosdep init
+rosdep update
+sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;add the following settings to your .zshrc file and ** source ** it:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;source /opt/ros/kinetic/setup.zsh
+source ~/.zshrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you use bash instead of zsh you need to run the following commands to set up your shell:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;source /opt/ros/kinetic/setup.bash
+source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;8&#34;&gt;
+&lt;li&gt;Instal OpenCV 3.x&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;8.1 Download
+OpenCV source codes can be downloaded in 
+&lt;a href=&#34;https://github.com/opencv/opencv/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;opencv github&lt;/a&gt;.
+OpenCV corresponding contrib can be downloaded in 
+&lt;a href=&#34;https://github.com/opencv/opencv_contrib/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;opencv_contrib github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;8.2 Prerequisites&lt;/p&gt;
+&lt;p&gt;Before you install OpenCV&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mkdir release &amp;amp;&amp;amp; cd release
+sudo apt-get build-dep -y opencv
+(Optional) sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;8.3 Cmake&lt;/p&gt;
+&lt;p&gt;For normal configure, just type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D WITH_V4L=ON -D ENABLE_CXX11=ON -D ENABLE_PRECOMPILED_HEADERS=OFF -D CMAKE_CXX_FLAGS=&#39;-std=c++11&#39; ..
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With contrib, just add: &lt;code&gt;-D OPENCV_EXTRA_MODULES_PATH=/home/hd/softwares/opencv_contrib-3.4.1/modules&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;With CUDA, just add: &lt;code&gt;-D WITH_CUDA=ON -D ENABLE_FAST_MATH=1 -D CUDA_FAST_MATH=1 -D WITH_CUBLAS=1 -D CUDA_GENERATION=Auto&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you encounter some C++ 11 errors during compiling when you install 3.4 or later, just add: &lt;code&gt;-D CMAKE_CXX_FLAGS=&#39;-std=c++11&#39; -D CUDA_NVCC_FLAGS=&#39;-std=c++11 --expt-relaxed-constexpr&#39;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;8.4 Compiling and installing&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;make -j8
+sudo make install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;8.5 Environment&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo &#39;/usr/local/lib&#39; | sudo tee -a /etc/ld.so.conf.d/opencv.conf  
+sudo ldconfig  
+printf &#39;# OpenCV\nPKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig\nexport PKG_CONFIG_PATH\n&#39; &amp;gt;&amp;gt; ~/.bashrc  
+source ~/.zshrc 
+pkg-config --modversion opencv	//check if opencv is installed and its version
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Price and spec of cloud based GPU</title>
+      <link>https://zhanghanduo.github.io/post/gpu_cloud/</link>
+      <pubDate>Mon, 29 Oct 2018 14:17:43 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/gpu_cloud/</guid>
+      <description>&lt;p&gt;I summarized several cloud based GPU services:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name of services&lt;/th&gt;
+&lt;th&gt;Specification&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Price (US$)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;AWS P2 instance&lt;/td&gt;
+&lt;td&gt;p2.xLarge&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0.9 / hour&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Azure NC6&lt;/td&gt;
+&lt;td&gt;1xK80&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0.9 / hour&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;a href=&#34;https://lambdalabs.com/service/gpu-cloud&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Lambda GPU cloud&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;8x AWS P2 instances&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0.90 / GPU/ hour&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;a href=&#34;https://ts.ntu.edu.sg/sites/hpc/Charges/Home.aspx&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;NTU HPCC&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;2 units of 1-P100 is scheduled to be ready by End of October&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0.78 / core/ hour&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

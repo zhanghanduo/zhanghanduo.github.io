@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Thien-Minh Nguyen | Zhang Handuo&#39;s Site</title>
+    <link>https://zhanghanduo.github.io/author/thien-minh-nguyen/</link>
+      <atom:link href="https://zhanghanduo.github.io/author/thien-minh-nguyen/index.xml" rel="self" type="application/rss+xml" />
+    <description>Thien-Minh Nguyen</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 24 Sep 2017 19:36:47 +0800</lastBuildDate>
+    <image>
+      <url>https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Thien-Minh Nguyen</title>
+      <link>https://zhanghanduo.github.io/author/thien-minh-nguyen/</link>
+    </image>
+    
+    <item>
+      <title>Ultra-wideband aided fast localization and mapping system</title>
+      <link>https://zhanghanduo.github.io/publication/ultra-wideband_localization/</link>
+      <pubDate>Sun, 24 Sep 2017 19:36:47 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/publication/ultra-wideband_localization/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

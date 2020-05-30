@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ML | Zhang Handuo&#39;s Site</title>
+    <link>https://zhanghanduo.github.io/tag/ml/</link>
+      <atom:link href="https://zhanghanduo.github.io/tag/ml/index.xml" rel="self" type="application/rss+xml" />
+    <description>ML</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 20 Aug 2018 16:21:12 +0800</lastBuildDate>
+    <image>
+      <url>https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>ML</title>
+      <link>https://zhanghanduo.github.io/tag/ml/</link>
+    </image>
+    
+    <item>
+      <title>You only look once (YOLO) -- (2)</title>
+      <link>https://zhanghanduo.github.io/post/yolov2/yolo2/</link>
+      <pubDate>Mon, 20 Aug 2018 16:21:12 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/yolov2/yolo2/</guid>
+      <description>&lt;p&gt;YOLO has higher localization errors and the recall (measure how good to locate all objects) is lower, compared to SSD. YOLOv2 is the second version of the YOLO with the objective of improving the accuracy significantly while making it faster.&lt;/p&gt;
+&lt;p&gt;The backbone network architecture of YOLO v2 is as follows:
+&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo2_net.jpg&#34; alt=&#34;Yolo2 Backbone&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;1-accuracy-improvements&#34;&gt;1. Accuracy Improvements&lt;/h2&gt;
+&lt;h3 id=&#34;batch-normalization&#34;&gt;Batch Normalization&lt;/h3&gt;
+&lt;p&gt;Also removes the need of dropouts. mAP increases by 2%.&lt;/p&gt;
+&lt;h3 id=&#34;high-resolution-classifier&#34;&gt;High-resolution Classifier&lt;/h3&gt;
+&lt;p&gt;To generate predictions with shape of $7\times 7 \times 125$, we replace the final fully connected layers with a  $3\times 3$ &lt;code&gt;convolution layer&lt;/code&gt; each outputting 1024 output channels. Then we apply a final $1\times 1$ convolutional layer to convert the $7\times 7 \times 1024$ output into $7\times 7 \times 125$ and retrain it end-to-end. This makes training easier and moves mAP up by 4%.&lt;/p&gt;
+&lt;h3 id=&#34;convolution-with-anchor-boxes&#34;&gt;Convolution with Anchor Boxes&lt;/h3&gt;
+&lt;p&gt;Early training is susceptible to unstable gradients. Arbitrary guesses on the boundary boxes may result in steep gradient changes.&lt;/p&gt;
+&lt;p&gt;In real life, boudnary boxes are not arbitrary. So the author create 5 &lt;strong&gt;anchor&lt;/strong&gt; boxes with the following shapes.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/anchor_box.jpeg&#34; alt=&#34;5 anchor boxes&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Instead of directly predicting 5 arbitrary boundary boxes, we predict offsdets to each of the anchor boxes. If we &lt;strong&gt;constrain&lt;/strong&gt; the offset values, we can maintain the diversity of the predictions and have each prediction focusing on specific shape. So the initial training will be more stable.&lt;/p&gt;
+&lt;h3 id=&#34;dimension-clusters&#34;&gt;Dimension Clusters&lt;/h3&gt;
+&lt;p&gt;In many problem domains, the boundary boxes have strong patterns. For example, in the autonomous driving, the 2 most common boundary boxes will be cars and pedestrians at different distances. To identify the top-K boundary boxes that have the best coverage for the training data, we run K-means clustering on the training data to locate the centroids of the top-K clusters.&lt;/p&gt;
+&lt;p&gt;Since we are dealing with boundary boxes rather than points, we cannot use the regular spatial distance to measure datapoint distances. No surprise, we use IoU.&lt;/p&gt;
+&lt;h3 id=&#34;direct-location-prediction&#34;&gt;Direct location prediction&lt;/h3&gt;
+&lt;p&gt;We make predictions on the offsets to the anchors. Nevertheless, if it is unconstrained, our guesses will be randomized again. YOLO predicts 5 parameters (tx, ty, tw, th, and to) and applies the sigma function to constraint its possible offset range.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo2_location_predict.jpeg&#34; alt=&#34;Location prediction on anchors&#34;&gt;&lt;/p&gt;
+&lt;p&gt;With the use of k-means clustering (dimension clusters) and the improvement mentioned in this section, mAP increases 5%.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>You only look once (YOLO) -- (1)</title>
+      <link>https://zhanghanduo.github.io/post/yolo1/</link>
+      <pubDate>Mon, 20 Aug 2018 11:39:58 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/yolo1/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;You Only Look Once (YOLO)&lt;/strong&gt; is an object detection system targeted for real-time processing. There are three versions of YOLO: YOLO, YOLOv2 (and YOLO9000) and YOLOv3. For this article, we mainly focus on YOLO first stage.&lt;/p&gt;
+&lt;h2 id=&#34;1-introduction&#34;&gt;1. Introduction&lt;/h2&gt;
+&lt;p&gt;The target is to find out the bounding box (rectangular boundary frame) of all the objects in the picture and meanwhile judge the categories of them, where left top coordinate denoted by $(x,y)$, as well as the width and height of the rectangle bounding box by $(w,h)$.
+&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/intro_yolo_cat.png&#34; alt=&#34;Bounding box of a detected cat&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The challenge here is that we have unknown number of objects, so the output dimension is not fixed.&lt;/p&gt;
+&lt;h2 id=&#34;2-grid-cell&#34;&gt;2. Grid Cell&lt;/h2&gt;
+&lt;p&gt;The idea of YOLO is to output a fixed number of dimension which is big enough to contain all the objects. We crop the original picture and divide it into an $S\times S$ grid. Each grid cell predicts only &lt;strong&gt;one&lt;/strong&gt; object. For example, the red grid cell tries to predict the &amp;ldquo;dog&amp;rdquo; object whose center falls inside that grid cell.
+&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo_dog_grid.jpg&#34; alt=&#34;Each grid cell only detects one object&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Each grid cell predicts a fixed number of boundary boxes. In the next example, the yellow grid cell makes two boundary box predictions (blue boxes) to locate where the person is.
+&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo_rider_demo.jpeg&#34; alt=&#34;Each grid cell make a fixed number of boundary box guesses for the object.&#34;&gt;&lt;/p&gt;
+&lt;p&gt;For each grid cell,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;it predicts &lt;strong&gt;B&lt;/strong&gt; boundary boxes and each box has a &lt;strong&gt;box confidence score&lt;/strong&gt;,&lt;/li&gt;
+&lt;li&gt;it detects &lt;strong&gt;one&lt;/strong&gt; object only regardless of the number of boxes B,&lt;/li&gt;
+&lt;li&gt;it predicts &lt;strong&gt;C conditional class probabilities&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For example we can use $7\times 7$ grids ($S\times S$), 2 boundary boxes (&lt;strong&gt;B&lt;/strong&gt;) with 1 corresponding confidence score and 4 coordinates ($w,h,x,y$), as well as 4 classes (&lt;strong&gt;C&lt;/strong&gt;), which makes up for $1\times 14$ tensor.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo_grid2.png&#34; alt=&#34;tensor dimemsion for 1 gird cell&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;3-network-design&#34;&gt;3. Network Design&lt;/h2&gt;
+&lt;p&gt;YOLO has 24 convolutional layers followed by 2 fully connected layers (FC). Some convolution layers use $1\times 1$ reduction layers to reduce the depth of feature maps. For the last convolution layer, the output is a tensor with shape $(7,7,1024). Then tensor is flattened, and finally output $7\times 7 \times 30$ parameters (if 20 classes and 2 bboxes predictions per grid cell) through linear regression.
+&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo1_net.png&#34; alt=&#34;YOLO network architecture&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;4-loss-fuction&#34;&gt;4. Loss Fuction&lt;/h2&gt;
+&lt;p&gt;YOLO uses sum-squared error between predictions (the one with highest IoU) and ground truth to calculate loss. The loss function composes of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the &lt;strong&gt;classification loss&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;the &lt;strong&gt;localization loss&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;the &lt;strong&gt;confidence loss&lt;/strong&gt; (the objectness of the box).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;classification-loss&#34;&gt;Classification loss&lt;/h3&gt;
+&lt;p&gt;$$
+\sum_{i=0}^{S^2} \mathbf{1}_i^{obj} \cdot{ \sum _{cc\in{classes}} \left( p _{i}(cc) - \hat{p} _i(cc) \right)^2}
+$$
+where $\mathbf{1}_i^{obj} = 1$ if an object appears in cell $i$, otherwise 0;&lt;/p&gt;
+&lt;p&gt;$\hat{p} _i(cc)$ denotes the conditional class probability for class $cc$ in cell $i$.&lt;/p&gt;
+&lt;h3 id=&#34;localization-loss&#34;&gt;Localization loss&lt;/h3&gt;
+&lt;p&gt;\begin{aligned}
+\lambda _{coord} \sum _{i=0}^{S^2} \sum _{j=0}^{B} \mathbf{1} _{ij}^{obj} \left[ (x _i - \hat{x _i})^2 + (y _i - \hat{y} _i)^2 \right]  \&lt;br&gt;
++ \lambda _{coord} \sum _{i=0}^{S^2} \sum _{j=0}^{B} \mathbf{1} _{ij}^{obj} \left[ (\sqrt{w _i} - \sqrt{\hat{w} _i} )^2 + (\sqrt{h _i} - \sqrt{\hat{h} _i} )^2 \right]
+\end{aligned}&lt;/p&gt;
+&lt;p&gt;where $\mathbf{1}_{ij}^{obj} = 1$ if the $j$th boundary box in cell $i$ is responsible for detecting object, otherwise 0;&lt;/p&gt;
+&lt;p&gt;$\lambda_{coord}$ increases the weight for the loss in the boundary box coordinates.&lt;/p&gt;
+&lt;p&gt;YOLO predicts the square root of bounding box width and height in order to differentiate large and small boxes. By setting $\lambda_{coord}$ (default: 5), we put more emphasis on the boundary box accuracy.&lt;/p&gt;
+&lt;h3 id=&#34;confidence-loss&#34;&gt;Confidence loss&lt;/h3&gt;
+&lt;p&gt;If an object is detected in the box, the confidence loss is:&lt;/p&gt;
+&lt;p&gt;$$
+\sum _{i=0}^{S^2} \sum _{j=0}^{B} \mathbf{1} _{ij}^{obj} \left(  C _i - \hat{C} _i \right)^2
+$$&lt;/p&gt;
+&lt;p&gt;where $\mathbf{1}_{ij}^{obj} = 1$ if the $j$th boundary box in cell $i$ is responsible for detecting the object, otherwise 0;&lt;/p&gt;
+&lt;p&gt;$\hat{C} _i$ is the box confidence score of the box $j$ in cell $i$.&lt;/p&gt;
+&lt;p&gt;However, if an object is not detected:&lt;/p&gt;
+&lt;p&gt;$$
+\lambda _{backg} \sum _{i=0}^{S^2} \sum _{j=0}^{B} \mathbf{1} _{ij}^{backg} \left(  C _i - \hat{C} _i \right)^2
+$$&lt;/p&gt;
+&lt;p&gt;where $\mathbf{1} _{ij}^{backg} $ is the complement of $ \mathbf{1} _{ij}^{obj}$.&lt;/p&gt;
+&lt;p&gt;$\hat{C} _i$ is the box confidence score of the box $j$ in cell $i$.&lt;/p&gt;
+&lt;p&gt;$\lambda _{backg}$ weights down the loss when detecting background.&lt;/p&gt;
+&lt;p&gt;As most boxes do not contain any objects, we weight the loss down by a factor $\lambda _{backg}$ (default: 0.5) to balance the weight.&lt;/p&gt;
+&lt;h2 id=&#34;5-inference-non-maximal-suppression&#34;&gt;5. Inference: Non-maximal Suppression&lt;/h2&gt;
+&lt;p&gt;Next, we multiply all these class scores with bounding box confidence and get class scores for different boudning boxes. So output is $7\times 7\times 2 = 98$.
+&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo_grid3.png&#34; alt=&#34;class scores for each bounding box&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Then we set a threshold value of scores and sort them descendingly. Non-max supressing alogrithm is used to set score to zero for redundant boxes.&lt;/p&gt;
+&lt;p&gt;For example, dog score for bbox1 as 0.5 and bbox 2 as 0.3. We take an Intersection over Union (IOU) of these values and if the value is greater than 0.5, we will set the value for box2 as zero, otherwise continue to the next box.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pooling Layer in CNN (1)</title>
+      <link>https://zhanghanduo.github.io/post/pooling/</link>
+      <pubDate>Wed, 02 May 2018 10:16:18 +0800</pubDate>
+      <guid>https://zhanghanduo.github.io/post/pooling/</guid>
+      <description>&lt;p&gt;Today I didn&amp;rsquo;t have the mood to continue my work on map merging of different cameras. So I read the paper from DeepMind of &lt;code&gt;Learned Deformation Stability in Convolutional Neural Networks&lt;/code&gt; recommended by 
+&lt;a href=&#34;https://wangchen.online/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Wang Chen&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;1-convolution-operation&#34;&gt;1. Convolution Operation&lt;/h2&gt;
+&lt;p&gt;Convolution operation is typically denoted with an asterisk&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;:
+$$
+s(t)=(x*w)(t)
+$$
+In Convolutional network terminology, the &lt;em&gt;x&lt;/em&gt; is referred to as the &lt;strong&gt;input&lt;/strong&gt;, and the &lt;em&gt;w&lt;/em&gt; as the &lt;strong&gt;kernel&lt;/strong&gt;. The output is sometimes referred to as the &lt;strong&gt;feature map&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Convolution leverages three ideas that help improve the ML system: &lt;strong&gt;sparse interactions&lt;/strong&gt;, &lt;strong&gt;parameter sharing&lt;/strong&gt; and &lt;strong&gt;equivariant representations&lt;/strong&gt;. Moreover, convolution provides a means for working with inputs of variable size.&lt;/p&gt;
+&lt;h4 id=&#34;--sparse-interactions&#34;&gt;- Sparse interactions&lt;/h4&gt;
+&lt;p&gt;Also called sparse connectivity or sparse weights, makes the kernel smaller than the input. By detecting small, meaningful features such as edges with kernels (tens or hundreds of pixels), we don&amp;rsquo;t need to process all the input pixels(millions), which means much fewer parameters.&lt;/p&gt;
+&lt;table&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/4c0bd1f6e4a69d35c8390362fbbca78a/sparse_connectivity.png&#34; alt=&#34;Sparse connectivity&#34; width=&#34;80%&#34;&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;img src=&#34;https://gitlab.com/handuo/msc_storage/uploads/bf6611fd0b7646dcc68358a173be3388/param_sharing.png&#34; alt=&#34;Parameter sharing&#34; width=&#34;100%&#34;&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr align=&#34;center&#34;&gt;
+            &lt;td&gt;Sparse connectivity&lt;/td&gt;
+            &lt;td&gt;Parameter sharing&lt;/td&gt;
+        &lt;/td&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;--parameter-sharing&#34;&gt;- Parameter sharing&lt;/h4&gt;
+&lt;p&gt;Refers to using the same parameter for more than one function in a model, so a network has &lt;strong&gt;tied weights&lt;/strong&gt;. This reduces the storage requirements of the model to &lt;em&gt;k&lt;/em&gt; parameters.&lt;/p&gt;
+&lt;h4 id=&#34;--equivariance-to-translation&#34;&gt;- Equivariance to translation&lt;/h4&gt;
+&lt;p&gt;But not to other transformations like scale or rotation change.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-pooling&#34;&gt;2. Pooling&lt;/h2&gt;
+&lt;p&gt;In all cases, pooling helps to make the representation become approximately invariant to small translations of the input. Pooling over spatial regions produces invariance to translation, but if we pool over the outputs of separately parametrized convolutions, the features can learn which transformations to become invariant to.&lt;/p&gt;
+&lt;p&gt;Because pooling summarizes the responses over a whole neighborhood, it is
+possible to use fewer pooling units than detector units, by reporting summary
+statistics for pooling regions spaced k pixels apart rather than 1 pixel apart.&lt;/p&gt;
+&lt;p&gt;This article tries to analyze the relationship between the pooling layers and deformation stability in CNN based on the paper &lt;code&gt;Learned Deformation Stability in Convolutional Neural Networks&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The paper tries to address the following questions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Does pooling have an effect on the learned deformation stability?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Is deformation stability achieved in the absence of pooling?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;How can deformation stability be achieved in the absence of pooling?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Traditional way of thinking &lt;code&gt;pooling&lt;/code&gt; layer is that it is useful in two reasons:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;By eliminating non-maximal (for &lt;em&gt;max-pooling&lt;/em&gt;), it reduces computation for upper layers.&lt;/li&gt;
+&lt;li&gt;It porvides a form of translation invariance. Imagine cascading a max-pooling layer with a convolutional layer. There are 8 directions in which one can translate the input image by a single pixel. If max-pooling is done over a $2\times2$ region, 3 out of these 8 possible configurations will produce exactly the same output at the conv layer. For $3\times3$ windows, this jumps to $\frac{5}{8}$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Then the author first defines the invariance to transformations of an input &lt;em&gt;X&lt;/em&gt; that do not affect the output &lt;em&gt;Y&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;$$
+P(Y|\tau(X))=P(Y|X) \forall \tau \in T
+$$&lt;/p&gt;
+&lt;p&gt;Then he defines the measurement of &lt;strong&gt;sensitivity to deformation&lt;/strong&gt; to evaluate this invariance.&lt;/p&gt;
+&lt;p&gt;For a representation &lt;em&gt;r&lt;/em&gt; mapping from input image to some layer of a CNN, the measurement is:&lt;/p&gt;
+&lt;p&gt;$$
+\frac{dcos(r(x), r(\tau(x))}{median(dcos(r(x), r(y)))}
+$$
+where &lt;em&gt;dcos&lt;/em&gt; is the cosine distance. That is we normalize distances by the median distance between randomly selected images from the original dataset.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Ian Goodfellow, Yoshua Bengio, and Aaron Courville, &lt;strong&gt;Deep Learning&lt;/strong&gt;, 2016. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
