@@ -18,24 +18,42 @@
       <pubDate>Mon, 20 Aug 2018 12:58:12 +0800</pubDate>
       <guid>https://zhanghanduo.github.io/post/yolov2/</guid>
       <description>&lt;p&gt;YOLO has higher localization errors and the recall (measure how good to locate all objects) is lower, compared to SSD. YOLOv2 is the second version of the YOLO with the objective of improving the accuracy significantly while making it faster.&lt;/p&gt;
+
 &lt;p&gt;The backbone network architecture of YOLO v2 is as follows:
-&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo2_net.jpg&#34; alt=&#34;Yolo2 Backbone&#34;&gt;&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo2_net.jpg&#34; alt=&#34;Yolo2 Backbone&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;1-accuracy-improvements&#34;&gt;1. Accuracy Improvements&lt;/h2&gt;
+
 &lt;h3 id=&#34;batch-normalization&#34;&gt;Batch Normalization&lt;/h3&gt;
+
 &lt;p&gt;Also removes the need of dropouts. mAP increases by 2%.&lt;/p&gt;
-&lt;h3 id=&#34;high-resolution-classifier&#34;&gt;High-resolution Classifier&lt;/h3&gt;
+
+&lt;h3 id=&#34;highresolution-classifier&#34;&gt;High-resolution Classifier&lt;/h3&gt;
+
 &lt;p&gt;To generate predictions with shape of $7\times 7 \times 125$, we replace the final fully connected layers with a  $3\times 3$ &lt;code&gt;convolution layer&lt;/code&gt; each outputting 1024 output channels. Then we apply a final $1\times 1$ convolutional layer to convert the $7\times 7 \times 1024$ output into $7\times 7 \times 125$ and retrain it end-to-end. This makes training easier and moves mAP up by 4%.&lt;/p&gt;
+
 &lt;h3 id=&#34;convolution-with-anchor-boxes&#34;&gt;Convolution with Anchor Boxes&lt;/h3&gt;
+
 &lt;p&gt;Early training is susceptible to unstable gradients. Arbitrary guesses on the boundary boxes may result in steep gradient changes.&lt;/p&gt;
+
 &lt;p&gt;In real life, boudnary boxes are not arbitrary. So the author create 5 &lt;strong&gt;anchor&lt;/strong&gt; boxes with the following shapes.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/anchor_box.jpeg&#34; alt=&#34;5 anchor boxes&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/anchor_box.jpeg&#34; alt=&#34;5 anchor boxes&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
+
 &lt;p&gt;Instead of directly predicting 5 arbitrary boundary boxes, we predict offsdets to each of the anchor boxes. If we &lt;strong&gt;constrain&lt;/strong&gt; the offset values, we can maintain the diversity of the predictions and have each prediction focusing on specific shape. So the initial training will be more stable.&lt;/p&gt;
+
 &lt;h3 id=&#34;dimension-clusters&#34;&gt;Dimension Clusters&lt;/h3&gt;
+
 &lt;p&gt;In many problem domains, the boundary boxes have strong patterns. For example, in the autonomous driving, the 2 most common boundary boxes will be cars and pedestrians at different distances. To identify the top-K boundary boxes that have the best coverage for the training data, we run K-means clustering on the training data to locate the centroids of the top-K clusters.&lt;/p&gt;
+
 &lt;p&gt;Since we are dealing with boundary boxes rather than points, we cannot use the regular spatial distance to measure datapoint distances. No surprise, we use IoU.&lt;/p&gt;
+
 &lt;h3 id=&#34;direct-location-prediction&#34;&gt;Direct location prediction&lt;/h3&gt;
+
 &lt;p&gt;We make predictions on the offsets to the anchors. Nevertheless, if it is unconstrained, our guesses will be randomized again. YOLO predicts 5 parameters (tx, ty, tw, th, and to) and applies the sigma function to constraint its possible offset range.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo2_location_predict.jpeg&#34; alt=&#34;Location prediction on anchors&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo2_location_predict.jpeg&#34; alt=&#34;Location prediction on anchors&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
+
 &lt;p&gt;With the use of k-means clustering (dimension clusters) and the improvement mentioned in this section, mAP increases 5%.&lt;/p&gt;
 </description>
     </item>

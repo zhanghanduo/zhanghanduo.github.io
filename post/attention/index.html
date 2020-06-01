@@ -27,7 +27,8 @@
   
     
   
-  <meta name="description" content="Digested and reproduced from &lt;a href=&quot;https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/&quot;&gt;Visualizing A Neural Machine Translation Model&lt;/a&gt; by Jay Alammar.  Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning.">
+  <meta name="description" content="Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.
+Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://zhanghanduo.github.io/post/attention/">
@@ -42,6 +43,9 @@
   
 
   
+  
+  
+  <script src="/js/mathjax-config.js"></script>
   
 
   
@@ -173,9 +177,9 @@
 
       
       
-        
-      
 
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
       
     
       
@@ -275,7 +279,8 @@
   <meta property="og:site_name" content="Zhang Handuo&#39;s Site">
   <meta property="og:url" content="https://zhanghanduo.github.io/post/attention/">
   <meta property="og:title" content="Seq2seq Model with Attention | Zhang Handuo&#39;s Site">
-  <meta property="og:description" content="Digested and reproduced from &lt;a href=&quot;https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/&quot;&gt;Visualizing A Neural Machine Translation Model&lt;/a&gt; by Jay Alammar.  Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."><meta property="og:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg">
+  <meta property="og:description" content="Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.
+Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."><meta property="og:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg">
   <meta property="twitter:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg"><meta property="og:locale" content="en-us">
   
     
@@ -329,7 +334,7 @@
       "url": "https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Digested and reproduced from \u0026lt;a href=\u0026quot;https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/\u0026quot;\u0026gt;Visualizing A Neural Machine Translation Model\u0026lt;/a\u0026gt; by Jay Alammar.  Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."
+  "description": "Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.\nSequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."
 }
 </script>
 
@@ -742,36 +747,118 @@
   <div class="article-container">
 
     <div class="article-style">
-      <pre><code class="language-js">Digested and reproduced from &lt;a href=&quot;https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/&quot;&gt;Visualizing A Neural Machine Translation Model&lt;/a&gt; by Jay Alammar.
-</code></pre>
+      <p>Digested and reproduced from <a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Visualizing A Neural Machine Translation Model</a> by Jay Alammar.</p>
 <p>Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. 
 <a href="https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/" target="_blank" rel="noopener">Google Translate</a> started  using such a model in production in late 2016. These models are explained in the two pioneering papers (
 <a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf" target="_blank" rel="noopener">Sutskever et al., 2014</a>, 
 <a href="http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf" target="_blank" rel="noopener">Cho et al., 2014</a>).</p>
 <p>A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items.</p>
 <p>In neural machine translation, a sequence is a series of words, processed one after another. The output is, likewise, a series of words:</p>
-<video width="100%" height="auto" loop autoplay controls>
+<!-- <video width="100%" height="auto" loop autoplay controls>
   <source src="/img/seq/seq2seq_2.mp4" type="video/mp4">
   Your browser does not support the video tag.
+</video> -->
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<video controls >
+  <source src="seq2seq_2.mp4" type="video/mp4">
 </video>
 <h2 id="architecture">Architecture</h2>
-<p>The model is composed of an <a  color="green" class="encoder">encoder</a> and a <span  color="blue" class="encoder">decoder</span>. The <span  color="green" class="encoder">encoder</span> processes each item in the input sequence and compiles the information into a vector (called the <span color="red" class="context">context</span>). After processing the input sequence, the <span  color="green" class="encoder">encoder</span> sends the <span color="red" class="context">context</span> over to the <span  color="blue" class="encoder">decoder</span>, which produces the output sequence item by item.</p>
-<video width="100%" height="auto" loop autoplay  controls>
-  <source src="/img/seq/seq2seq_3.mp4" type="video/mp4">
-  Your browser does not support the video tag.
+<p>The model is composed of an <span class="markup-quote">encoder</span> and a <span class="markup-quote">decoder</span>. The <span class="markup-quote">encoder</span> processes each item in the input sequence and compiles the information into a vector (called the <span class="markup-quote">context</span> ). After processing the input sequence, the <span class="markup-quote">encoder</span> sends the <span class="markup-quote">context</span> over to the <span class="markup-quote">decoder</span> , which produces the output sequence item by item.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<video controls >
+  <source src="seq2seq_3.mp4" type="video/mp4">
 </video>
 <p>The same applies in the case of machine translation.</p>
-<video width="100%" height="auto" loop autoplay controls>
-  <source src="/img/seq/seq2seq_4.mp4" type="video/mp4">
-  Your browser does not support the video tag.
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<video controls >
+  <source src="seq2seq_4.mp4" type="video/mp4">
 </video>
-<p>RNN (recurrent neural network) is shown as an illustration here to be the model of both <span  color="green" class="encoder">encoder</span> and <span  color="blue" class="encoder">decoder</span> (Be sure to check out Luis Serrano&rsquo;s 
+<p>RNN (recurrent neural network) is shown as an illustration here to be the model of both <span class="markup-quote">encoder</span> and <span class="markup-quote">decoder</span> (Be sure to check out Luis Serrano&rsquo;s 
 <a href="https://www.youtube.com/watch?v=UNmqTiOnRfg" target="_blank" rel="noopener">A friendly introduction to Recurrent Neural Networks</a> for an intro to RNNs).</p>
-<div class="img-div" markdown="0">
+<!-- <div class="img-div" markdown="0">
     <img src="/img/seq/context.png" />
     The <span color="red" class="context">context</span>  is a vector of floats. Later in this post we will visualize vectors in color by assigning brighter colors to the cells with higher values.
-</div>
-<p>You can set the size of the <span color="red" class="context">context</span> vector when you set up your model. It is basically the number of hidden units in the <span  color="green" class="encoder">encoder</span> RNN. These visualizations show a vector of size 4, but in real world applications the <span color="red" class="context">context</span> vector would be of a size like 256, 512, or 1024.</p>
+</div> -->
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-the-context-is-a-vector-of-floats-later-in-this-post-we-will-visualize-vectors-in-color-by-assigning-brighter-colors-to-the-cells-with-higher-values">
+
+
+  <a data-fancybox="" href="/post/attention/context_hu7a6233c42fac561492b0af65e3f78395_20402_2000x2000_fit_lanczos_2.png" data-caption="The &lt;strong&gt;context&lt;/strong&gt; is a vector of floats. Later in this post we will visualize vectors in color by assigning brighter colors to the cells with higher values.">
+
+
+  <img data-src="/post/attention/context_hu7a6233c42fac561492b0af65e3f78395_20402_2000x2000_fit_lanczos_2.png" class="lazyload" alt="" width="716" height="252">
+</a>
+
+
+  
+  
+  <figcaption>
+    The <strong>context</strong> is a vector of floats. Later in this post we will visualize vectors in color by assigning brighter colors to the cells with higher values.
+  </figcaption>
+
+
+</figure>
+
+<p>You can set the size of the <span class="markup-quote">context</span> vector when you set up your model. It is basically the number of hidden units in the <span class="markup-quote">encoder</span> RNN. These visualizations show a vector of size 4, but in real world applications the <span class="markup-quote">context</span> vector would be of a size like 256, 512, or 1024.</p>
 
     </div>
 

@@ -17,36 +17,118 @@
       <link>https://zhanghanduo.github.io/post/attention/</link>
       <pubDate>Mon, 01 Jun 2020 12:58:12 +0800</pubDate>
       <guid>https://zhanghanduo.github.io/post/attention/</guid>
-      <description>&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;Digested and reproduced from &amp;lt;a href=&amp;quot;https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/&amp;quot;&amp;gt;Visualizing A Neural Machine Translation Model&amp;lt;/a&amp;gt; by Jay Alammar.
-&lt;/code&gt;&lt;/pre&gt;
+      <description>&lt;p&gt;Digested and reproduced from &lt;a href=&#34;https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/&#34;&gt;Visualizing A Neural Machine Translation Model&lt;/a&gt; by Jay Alammar.&lt;/p&gt;
 &lt;p&gt;Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. 
 &lt;a href=&#34;https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Google Translate&lt;/a&gt; started  using such a model in production in late 2016. These models are explained in the two pioneering papers (
 &lt;a href=&#34;https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sutskever et al., 2014&lt;/a&gt;, 
 &lt;a href=&#34;http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Cho et al., 2014&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&amp;hellip;etc) and outputs another sequence of items.&lt;/p&gt;
 &lt;p&gt;In neural machine translation, a sequence is a series of words, processed one after another. The output is, likewise, a series of words:&lt;/p&gt;
-&lt;video width=&#34;100%&#34; height=&#34;auto&#34; loop autoplay controls&gt;
+&lt;!-- &lt;video width=&#34;100%&#34; height=&#34;auto&#34; loop autoplay controls&gt;
   &lt;source src=&#34;https://zhanghanduo.github.io/img/seq/seq2seq_2.mp4&#34; type=&#34;video/mp4&#34;&gt;
   Your browser does not support the video tag.
+&lt;/video&gt; --&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+&lt;video controls &gt;
+  &lt;source src=&#34;seq2seq_2.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 &lt;h2 id=&#34;architecture&#34;&gt;Architecture&lt;/h2&gt;
-&lt;p&gt;The model is composed of an &lt;a  color=&#34;green&#34; class=&#34;encoder&#34;&gt;encoder&lt;/a&gt; and a &lt;span  color=&#34;blue&#34; class=&#34;encoder&#34;&gt;decoder&lt;/span&gt;. The &lt;span  color=&#34;green&#34; class=&#34;encoder&#34;&gt;encoder&lt;/span&gt; processes each item in the input sequence and compiles the information into a vector (called the &lt;span color=&#34;red&#34; class=&#34;context&#34;&gt;context&lt;/span&gt;). After processing the input sequence, the &lt;span  color=&#34;green&#34; class=&#34;encoder&#34;&gt;encoder&lt;/span&gt; sends the &lt;span color=&#34;red&#34; class=&#34;context&#34;&gt;context&lt;/span&gt; over to the &lt;span  color=&#34;blue&#34; class=&#34;encoder&#34;&gt;decoder&lt;/span&gt;, which produces the output sequence item by item.&lt;/p&gt;
-&lt;video width=&#34;100%&#34; height=&#34;auto&#34; loop autoplay  controls&gt;
-  &lt;source src=&#34;https://zhanghanduo.github.io/img/seq/seq2seq_3.mp4&#34; type=&#34;video/mp4&#34;&gt;
-  Your browser does not support the video tag.
+&lt;p&gt;The model is composed of an &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt; and a &lt;span class=&#34;markup-quote&#34;&gt;decoder&lt;/span&gt;. The &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt; processes each item in the input sequence and compiles the information into a vector (called the &lt;span class=&#34;markup-quote&#34;&gt;context&lt;/span&gt; ). After processing the input sequence, the &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt; sends the &lt;span class=&#34;markup-quote&#34;&gt;context&lt;/span&gt; over to the &lt;span class=&#34;markup-quote&#34;&gt;decoder&lt;/span&gt; , which produces the output sequence item by item.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+&lt;video controls &gt;
+  &lt;source src=&#34;seq2seq_3.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 &lt;p&gt;The same applies in the case of machine translation.&lt;/p&gt;
-&lt;video width=&#34;100%&#34; height=&#34;auto&#34; loop autoplay controls&gt;
-  &lt;source src=&#34;https://zhanghanduo.github.io/img/seq/seq2seq_4.mp4&#34; type=&#34;video/mp4&#34;&gt;
-  Your browser does not support the video tag.
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+&lt;video controls &gt;
+  &lt;source src=&#34;seq2seq_4.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
-&lt;p&gt;RNN (recurrent neural network) is shown as an illustration here to be the model of both &lt;span  color=&#34;green&#34; class=&#34;encoder&#34;&gt;encoder&lt;/span&gt; and &lt;span  color=&#34;blue&#34; class=&#34;encoder&#34;&gt;decoder&lt;/span&gt; (Be sure to check out Luis Serrano&amp;rsquo;s 
+&lt;p&gt;RNN (recurrent neural network) is shown as an illustration here to be the model of both &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt; and &lt;span class=&#34;markup-quote&#34;&gt;decoder&lt;/span&gt; (Be sure to check out Luis Serrano&amp;rsquo;s 
 &lt;a href=&#34;https://www.youtube.com/watch?v=UNmqTiOnRfg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;A friendly introduction to Recurrent Neural Networks&lt;/a&gt; for an intro to RNNs).&lt;/p&gt;
-&lt;div class=&#34;img-div&#34; markdown=&#34;0&#34;&gt;
+&lt;!-- &lt;div class=&#34;img-div&#34; markdown=&#34;0&#34;&gt;
     &lt;img src=&#34;https://zhanghanduo.github.io/img/seq/context.png&#34; /&gt;
     The &lt;span color=&#34;red&#34; class=&#34;context&#34;&gt;context&lt;/span&gt;  is a vector of floats. Later in this post we will visualize vectors in color by assigning brighter colors to the cells with higher values.
-&lt;/div&gt;
-&lt;p&gt;You can set the size of the &lt;span color=&#34;red&#34; class=&#34;context&#34;&gt;context&lt;/span&gt; vector when you set up your model. It is basically the number of hidden units in the &lt;span  color=&#34;green&#34; class=&#34;encoder&#34;&gt;encoder&lt;/span&gt; RNN. These visualizations show a vector of size 4, but in real world applications the &lt;span color=&#34;red&#34; class=&#34;context&#34;&gt;context&lt;/span&gt; vector would be of a size like 256, 512, or 1024.&lt;/p&gt;
+&lt;/div&gt; --&gt;
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-the-context-is-a-vector-of-floats-later-in-this-post-we-will-visualize-vectors-in-color-by-assigning-brighter-colors-to-the-cells-with-higher-values&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://zhanghanduo.github.io/post/attention/context_hu7a6233c42fac561492b0af65e3f78395_20402_2000x2000_fit_lanczos_2.png&#34; data-caption=&#34;The &amp;lt;strong&amp;gt;context&amp;lt;/strong&amp;gt; is a vector of floats. Later in this post we will visualize vectors in color by assigning brighter colors to the cells with higher values.&#34;&gt;
+
+
+  &lt;img data-src=&#34;https://zhanghanduo.github.io/post/attention/context_hu7a6233c42fac561492b0af65e3f78395_20402_2000x2000_fit_lanczos_2.png&#34; class=&#34;lazyload&#34; alt=&#34;&#34; width=&#34;716&#34; height=&#34;252&#34;&gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    The &lt;strong&gt;context&lt;/strong&gt; is a vector of floats. Later in this post we will visualize vectors in color by assigning brighter colors to the cells with higher values.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;You can set the size of the &lt;span class=&#34;markup-quote&#34;&gt;context&lt;/span&gt; vector when you set up your model. It is basically the number of hidden units in the &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt; RNN. These visualizations show a vector of size 4, but in real world applications the &lt;span class=&#34;markup-quote&#34;&gt;context&lt;/span&gt; vector would be of a size like 256, 512, or 1024.&lt;/p&gt;
 </description>
     </item>
     
@@ -262,24 +344,42 @@ pkg-config --modversion opencv	//check if opencv is installed and its version
       <pubDate>Mon, 20 Aug 2018 12:58:12 +0800</pubDate>
       <guid>https://zhanghanduo.github.io/post/yolov2/</guid>
       <description>&lt;p&gt;YOLO has higher localization errors and the recall (measure how good to locate all objects) is lower, compared to SSD. YOLOv2 is the second version of the YOLO with the objective of improving the accuracy significantly while making it faster.&lt;/p&gt;
+
 &lt;p&gt;The backbone network architecture of YOLO v2 is as follows:
-&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo2_net.jpg&#34; alt=&#34;Yolo2 Backbone&#34;&gt;&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo2_net.jpg&#34; alt=&#34;Yolo2 Backbone&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;1-accuracy-improvements&#34;&gt;1. Accuracy Improvements&lt;/h2&gt;
+
 &lt;h3 id=&#34;batch-normalization&#34;&gt;Batch Normalization&lt;/h3&gt;
+
 &lt;p&gt;Also removes the need of dropouts. mAP increases by 2%.&lt;/p&gt;
-&lt;h3 id=&#34;high-resolution-classifier&#34;&gt;High-resolution Classifier&lt;/h3&gt;
+
+&lt;h3 id=&#34;highresolution-classifier&#34;&gt;High-resolution Classifier&lt;/h3&gt;
+
 &lt;p&gt;To generate predictions with shape of $7\times 7 \times 125$, we replace the final fully connected layers with a  $3\times 3$ &lt;code&gt;convolution layer&lt;/code&gt; each outputting 1024 output channels. Then we apply a final $1\times 1$ convolutional layer to convert the $7\times 7 \times 1024$ output into $7\times 7 \times 125$ and retrain it end-to-end. This makes training easier and moves mAP up by 4%.&lt;/p&gt;
+
 &lt;h3 id=&#34;convolution-with-anchor-boxes&#34;&gt;Convolution with Anchor Boxes&lt;/h3&gt;
+
 &lt;p&gt;Early training is susceptible to unstable gradients. Arbitrary guesses on the boundary boxes may result in steep gradient changes.&lt;/p&gt;
+
 &lt;p&gt;In real life, boudnary boxes are not arbitrary. So the author create 5 &lt;strong&gt;anchor&lt;/strong&gt; boxes with the following shapes.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/anchor_box.jpeg&#34; alt=&#34;5 anchor boxes&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/anchor_box.jpeg&#34; alt=&#34;5 anchor boxes&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
+
 &lt;p&gt;Instead of directly predicting 5 arbitrary boundary boxes, we predict offsdets to each of the anchor boxes. If we &lt;strong&gt;constrain&lt;/strong&gt; the offset values, we can maintain the diversity of the predictions and have each prediction focusing on specific shape. So the initial training will be more stable.&lt;/p&gt;
+
 &lt;h3 id=&#34;dimension-clusters&#34;&gt;Dimension Clusters&lt;/h3&gt;
+
 &lt;p&gt;In many problem domains, the boundary boxes have strong patterns. For example, in the autonomous driving, the 2 most common boundary boxes will be cars and pedestrians at different distances. To identify the top-K boundary boxes that have the best coverage for the training data, we run K-means clustering on the training data to locate the centroids of the top-K clusters.&lt;/p&gt;
+
 &lt;p&gt;Since we are dealing with boundary boxes rather than points, we cannot use the regular spatial distance to measure datapoint distances. No surprise, we use IoU.&lt;/p&gt;
+
 &lt;h3 id=&#34;direct-location-prediction&#34;&gt;Direct location prediction&lt;/h3&gt;
+
 &lt;p&gt;We make predictions on the offsets to the anchors. Nevertheless, if it is unconstrained, our guesses will be randomized again. YOLO predicts 5 parameters (tx, ty, tw, th, and to) and applies the sigma function to constraint its possible offset range.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo2_location_predict.jpeg&#34; alt=&#34;Location prediction on anchors&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo2_location_predict.jpeg&#34; alt=&#34;Location prediction on anchors&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
+
 &lt;p&gt;With the use of k-means clustering (dimension clusters) and the improvement mentioned in this section, mAP increases 5%.&lt;/p&gt;
 </description>
     </item>
