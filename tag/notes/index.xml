@@ -17,7 +17,8 @@
       <link>https://zhanghanduo.github.io/post/attention/</link>
       <pubDate>Mon, 01 Jun 2020 12:58:12 +0800</pubDate>
       <guid>https://zhanghanduo.github.io/post/attention/</guid>
-      <description>&lt;p&gt;Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
+      <description>&lt;p&gt;&lt;span class=&#34;discussion&#34;&gt;Digested and reproduced from &lt;a href=&#34;https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/&#34;&gt;Visualizing A Neural Machine Translation Model&lt;/a&gt; by Jay Alammar.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
 &lt;a href=&#34;https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;using&lt;/a&gt; such a model in production in late 2016. These models are explained in the two pioneering papers (
 &lt;a href=&#34;https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sutskever et al., 2014&lt;/a&gt;, 
 &lt;a href=&#34;http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Cho et al., 2014&lt;/a&gt;).&lt;/p&gt;
@@ -28,7 +29,7 @@
   Your browser does not support the video tag.
 &lt;/video&gt;
 &lt;h2 id=&#34;architecture&#34;&gt;Architecture&lt;/h2&gt;
-&lt;p&gt;The model is composed of an &lt;em&gt;encoder&lt;/em&gt; and a &lt;em&gt;decoder&lt;/em&gt;. The encoder processes each item in the input sequence and compiles the information into a vector (called the &lt;span class=&#34;context&#34;&gt;context&lt;/span&gt;). After processing the input sequence, the encoder sends the &amp;ldquo;context&amp;rdquo; over to the &lt;em&gt;decoder&lt;/em&gt;, which produces the output sequence item by item.&lt;/p&gt;
+&lt;p&gt;The model is composed of an &lt;span  color=&#34;green&#34; class=&#34;encoder&#34;&gt;encoder&lt;/span&gt; and a &lt;span  color=&#34;blue&#34; class=&#34;encoder&#34;&gt;decoder&lt;/span&gt;. The &lt;span  color=&#34;green&#34; class=&#34;encoder&#34;&gt;encoder&lt;/span&gt; processes each item in the input sequence and compiles the information into a vector (called the &lt;span color=&#34;red&#34; class=&#34;context&#34;&gt;context&lt;/span&gt;). After processing the input sequence, the &lt;span  color=&#34;green&#34; class=&#34;encoder&#34;&gt;encoder&lt;/span&gt; sends the &lt;span color=&#34;red&#34; class=&#34;context&#34;&gt;context&lt;/span&gt; over to the &lt;span  color=&#34;blue&#34; class=&#34;encoder&#34;&gt;decoder&lt;/span&gt;, which produces the output sequence item by item.&lt;/p&gt;
 &lt;video width=&#34;100%&#34; height=&#34;auto&#34; loop autoplay  controls&gt;
   &lt;source src=&#34;https://zhanghanduo.github.io/img/seq/seq2seq_3.mp4&#34; type=&#34;video/mp4&#34;&gt;
   Your browser does not support the video tag.
@@ -38,6 +39,13 @@
   &lt;source src=&#34;https://zhanghanduo.github.io/img/seq/seq2seq_4.mp4&#34; type=&#34;video/mp4&#34;&gt;
   Your browser does not support the video tag.
 &lt;/video&gt;
+&lt;p&gt;RNN (recurrent neural network) is shown as an illustration here to be the model of both &lt;span  color=&#34;green&#34; class=&#34;encoder&#34;&gt;encoder&lt;/span&gt; and &lt;span  color=&#34;blue&#34; class=&#34;encoder&#34;&gt;decoder&lt;/span&gt; (Be sure to check out Luis Serrano&amp;rsquo;s 
+&lt;a href=&#34;https://www.youtube.com/watch?v=UNmqTiOnRfg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;A friendly introduction to Recurrent Neural Networks&lt;/a&gt; for an intro to RNNs).&lt;/p&gt;
+&lt;div class=&#34;img-div&#34; markdown=&#34;0&#34;&gt;
+    &lt;img src=&#34;https://zhanghanduo.github.io/img/seq/context.png&#34; /&gt;
+    The &lt;span color=&#34;red&#34; class=&#34;context&#34;&gt;context&lt;/span&gt;  is a vector of floats. Later in this post we will visualize vectors in color by assigning brighter colors to the cells with higher values.
+&lt;/div&gt;
+&lt;p&gt;You can set the size of the &lt;span color=&#34;red&#34; class=&#34;context&#34;&gt;context&lt;/span&gt; vector when you set up your model. It is basically the number of hidden units in the &lt;span  color=&#34;green&#34; class=&#34;encoder&#34;&gt;encoder&lt;/span&gt; RNN. These visualizations show a vector of size 4, but in real world applications the &lt;span color=&#34;red&#34; class=&#34;context&#34;&gt;context&lt;/span&gt; vector would be of a size like 256, 512, or 1024.&lt;/p&gt;
 </description>
     </item>
     

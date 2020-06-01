@@ -27,7 +27,8 @@
   
     
   
-  <meta name="description" content="Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started using such a model in production in late 2016.">
+  <meta name="description" content="Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.
+Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://zhanghanduo.github.io/post/attention/">
@@ -275,7 +276,8 @@
   <meta property="og:site_name" content="Zhang Handuo&#39;s Site">
   <meta property="og:url" content="https://zhanghanduo.github.io/post/attention/">
   <meta property="og:title" content="Seq2seq Model with Attention | Zhang Handuo&#39;s Site">
-  <meta property="og:description" content="Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started using such a model in production in late 2016."><meta property="og:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg">
+  <meta property="og:description" content="Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.
+Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."><meta property="og:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg">
   <meta property="twitter:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg"><meta property="og:locale" content="en-us">
   
     
@@ -329,7 +331,7 @@
       "url": "https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started using such a model in production in late 2016."
+  "description": "Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.\nSequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."
 }
 </script>
 
@@ -695,7 +697,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    2 min read
   </span>
   
 
@@ -742,7 +744,8 @@
   <div class="article-container">
 
     <div class="article-style">
-      <p>Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
+      <p><span class="discussion">Digested and reproduced from <a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Visualizing A Neural Machine Translation Model</a> by Jay Alammar.</span></p>
+<p>Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
 <a href="https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/" target="_blank" rel="noopener">using</a> such a model in production in late 2016. These models are explained in the two pioneering papers (
 <a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf" target="_blank" rel="noopener">Sutskever et al., 2014</a>, 
 <a href="http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf" target="_blank" rel="noopener">Cho et al., 2014</a>).</p>
@@ -753,7 +756,7 @@
   Your browser does not support the video tag.
 </video>
 <h2 id="architecture">Architecture</h2>
-<p>The model is composed of an <em>encoder</em> and a <em>decoder</em>. The encoder processes each item in the input sequence and compiles the information into a vector (called the <span class="context">context</span>). After processing the input sequence, the encoder sends the &ldquo;context&rdquo; over to the <em>decoder</em>, which produces the output sequence item by item.</p>
+<p>The model is composed of an <span  color="green" class="encoder">encoder</span> and a <span  color="blue" class="encoder">decoder</span>. The <span  color="green" class="encoder">encoder</span> processes each item in the input sequence and compiles the information into a vector (called the <span color="red" class="context">context</span>). After processing the input sequence, the <span  color="green" class="encoder">encoder</span> sends the <span color="red" class="context">context</span> over to the <span  color="blue" class="encoder">decoder</span>, which produces the output sequence item by item.</p>
 <video width="100%" height="auto" loop autoplay  controls>
   <source src="/img/seq/seq2seq_3.mp4" type="video/mp4">
   Your browser does not support the video tag.
@@ -763,6 +766,13 @@
   <source src="/img/seq/seq2seq_4.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+<p>RNN (recurrent neural network) is shown as an illustration here to be the model of both <span  color="green" class="encoder">encoder</span> and <span  color="blue" class="encoder">decoder</span> (Be sure to check out Luis Serrano&rsquo;s 
+<a href="https://www.youtube.com/watch?v=UNmqTiOnRfg" target="_blank" rel="noopener">A friendly introduction to Recurrent Neural Networks</a> for an intro to RNNs).</p>
+<div class="img-div" markdown="0">
+    <img src="/img/seq/context.png" />
+    The <span color="red" class="context">context</span>  is a vector of floats. Later in this post we will visualize vectors in color by assigning brighter colors to the cells with higher values.
+</div>
+<p>You can set the size of the <span color="red" class="context">context</span> vector when you set up your model. It is basically the number of hidden units in the <span  color="green" class="encoder">encoder</span> RNN. These visualizations show a vector of size 4, but in real world applications the <span color="red" class="context">context</span> vector would be of a size like 256, 512, or 1024.</p>
 
     </div>
 
