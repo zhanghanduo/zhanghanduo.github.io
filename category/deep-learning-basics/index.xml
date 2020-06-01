@@ -246,7 +246,7 @@
 
 &lt;h2 id=&#34;2-attention-mechanism&#34;&gt;2. Attention Mechanism&lt;/h2&gt;
 
-&lt;p&gt;Attention is a generalized pooling method with. The core component in the attention mechanism is the attention layer, or called attention for simplicity. An input of the attention layer is called a query. For a query, attention returns an o bias alignment over inputsutput based on the memory — a set of key-value pairs encoded in the attention layer. To be more specific, assume that the memory contains $n$ key-value pairs, $(k_1, v_1), \cdot, (k_n, v_n)$ with $\mathbf{k}\in{ \mathcal{R}^{d_k}}, \mathbf{v}\in{ \mathcal{R}^{d_v}}$. Given a query $q\in \mathcal{R}^{d_q}$,  the attention layer returns an output $\mathbf{o}\in{ \mathcal{R}^{d_v}} $ with the same shape as the value.&lt;/p&gt;
+&lt;p&gt;Attention is a generalized pooling method with. The core component in the attention mechanism is the attention layer, or called attention for simplicity. An input of the attention layer is called a query. For a query, attention returns an o bias alignment over inputsutput based on the memory — a set of key-value pairs encoded in the attention layer. To be more specific, assume that the memory contains $n$ key-value pairs, $(k_1, v_1), \cdot, (k_n, v_n)$ with $\mathbf{k}\in{ \mathbb{R}^{d_k}}, \mathbf{v}\in{ \mathbb{R}^{d_v}}$. Given a query $\mathbf{q}\in \mathbb{R}^{d_q}$, the attention layer returns an output $\mathbf{o}\in{ \mathbb{R}^{d_v}} $ with the same shape as the value.&lt;/p&gt;
 
 &lt;p&gt;Pros of using attention:&lt;/p&gt;
 
