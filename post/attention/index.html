@@ -28,7 +28,7 @@
     
   
   <meta name="description" content="Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.
- Table of Contents  Architecture   Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning.">
+ Table of Contents  Architecture Attention Mechanism   Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://zhanghanduo.github.io/post/attention/">
@@ -280,7 +280,7 @@
   <meta property="og:url" content="https://zhanghanduo.github.io/post/attention/">
   <meta property="og:title" content="Seq2seq Model with Attention | Zhang Handuo&#39;s Site">
   <meta property="og:description" content="Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.
- Table of Contents  Architecture   Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."><meta property="og:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg">
+ Table of Contents  Architecture Attention Mechanism   Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."><meta property="og:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg">
   <meta property="twitter:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg"><meta property="og:locale" content="en-us">
   
     
@@ -334,7 +334,7 @@
       "url": "https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.\n Table of Contents  Architecture   Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."
+  "description": "Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.\n Table of Contents  Architecture Attention Mechanism   Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."
 }
 </script>
 
@@ -700,7 +700,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    4 min read
+    6 min read
   </span>
   
 
@@ -754,6 +754,7 @@
 <nav id="TableOfContents">
   <ul>
     <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#attention-mechanism">Attention Mechanism</a></li>
   </ul>
 </nav>
 <p>Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. 
@@ -762,11 +763,7 @@
 <a href="http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf" target="_blank" rel="noopener">Cho et al., 2014</a>).</p>
 <p>A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items.</p>
 <p>In neural machine translation, a sequence is a series of words, processed one after another. The output is, likewise, a series of words:</p>
-<video width="100%" height="auto" loop autoplay controls>
-  <source src="seq2seq_2.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-<!-- 
+
 
 
 
@@ -783,7 +780,7 @@
 
 <video controls >
   <source src="seq2seq_2.mp4" type="video/mp4">
-</video> -->
+</video>
 <h2 id="architecture">Architecture</h2>
 <p>The model is composed of an <span class="markup-quote">encoder</span> and a <span class="markup-quote">decoder</span>. The <span class="markup-quote">encoder</span> processes each item in the input sequence and compiles the information into a vector (called the <span class="markup-quote">context</span> ). After processing the input sequence, the <span class="markup-quote">encoder</span> sends the <span class="markup-quote">context</span> over to the <span class="markup-quote">decoder</span> , which produces the output sequence item by item.</p>
 
@@ -924,7 +921,7 @@
 </video>
 <p>The next RNN step takes the second input vector and hidden state #1 to create the output of that time step. Later in the post, we&rsquo;ll use an animation like this to describe the vectors inside a neural machine translation model.</p>
 <p>In the following visualization, each pulse for the <span class="markup-quote">encoder</span> or <span class="markup-quote">decoder</span>  is that RNN processing its inputs and generating an output for that time step. Since the <span class="markup-quote">encoder</span> and <span class="markup-quote">decoder</span> are both RNNs, each time step one of the RNNs does some processing, it updates its <span class="markup-quote">hidden state</span>  based on its inputs and previous inputs it has seen.</p>
-<p>Let&rsquo;s look at the <span class="markup-quote">hidden states</span>  for the <span class="markup-quote">encoder</span>. Notice how the last <span class="markup-quote">hidden state</span>  is actually the <span class="markup-quote">context</span>  we pass along to the <span class="markup-quote">decoder</span>.</p>
+<p>Let&rsquo;s look at the <span class="markup-quote">hidden states</span> for the <span class="markup-quote">encoder</span>. Notice how the last <span class="markup-quote">hidden state</span>  is actually the <span class="markup-quote">context</span>  we pass along to the <span class="markup-quote">decoder</span>.</p>
 
 
 
@@ -963,7 +960,7 @@
 <video controls >
   <source src="seq2seq_6.mp4" type="video/mp4">
 </video>
-<h1 id="attention-mechanism">Attention Mechanism</h1>
+<h2 id="attention-mechanism">Attention Mechanism</h2>
 <p>The <span class="markup-quote">context</span> vector turned out to be a bottleneck for these types of models. It made it challenging for the models to deal with long sentences. A solution was proposed in 
 <a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="noopener">Bahdanau et al., 2014</a> and 
 <a href="https://arxiv.org/abs/1508.04025" target="_blank" rel="noopener">Luong et al., 2015</a>. These papers introduced and refined a technique called &ldquo;Attention&rdquo;, which highly improved the quality of machine translation systems. Attention allows the model to focus on the relevant parts of the input sequence as needed.</p>
@@ -1005,6 +1002,137 @@
 </figure>
 
 <p>Let&rsquo;s continue looking at attention models at this high level of abstraction. An attention model differs from a classic sequence-to-sequence model in two main ways:</p>
+<p>First, the encoder passes a lot more data to the decoder. Instead of passing the last hidden state of the encoding stage, the encoder passes <em>all</em> the hidden states to the decoder:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<video controls >
+  <source src="seq2seq_7.mp4" type="video/mp4">
+</video>
+<p>Second, an attention decoder does an extra step before producing its output. In order to focus on the parts of the input that are relevant to this decoding time step, the decoder does the following:</p>
+<ol>
+<li>Look at the set of encoder <span class="markup-quote">hidden states</span> it received &ndash; each encoder hidden states  is most associated with a certain word in the input sentence</li>
+<li>Give each <span class="markup-quote">hidden states</span> a score (let&rsquo;s ignore how the scoring is done for now)</li>
+<li>Multiply each <span class="markup-quote">hidden states</span> by its softmaxed score, thus amplifying <span class="markup-quote">hidden states</span> with high scores, and drowning out <span class="markup-quote">hidden states</span> with low scores</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<video controls >
+  <source src="attention_process.mp4" type="video/mp4">
+</video>
+<p>This scoring exercise is done at each time step on the <span class="markup-quote">decoder</span> side.</p>
+<p>Let us now bring the whole thing together in the following visualization and look at how the attention process works:</p>
+<ol>
+<li>The attention decoder RNN takes in the embedding of the &lt;END&gt; token, and an initial decoder hidden state.</li>
+<li>The RNN processes its inputs, producing an output and a new hidden state vector (h4). The output is discarded.</li>
+<li>Attention Step: We use the encoder hidden states and the h4 vector to calculate a context vector (C4) for this time step.</li>
+<li>We concatenate h4 and C4 into one vector.</li>
+<li>We pass this vector through a <span class="markup-quote">feedforward neural network</span> (one trained jointly with the model).</li>
+<li>The output of the feedforward neural networks indicates the output word of this time step.</li>
+<li>Repeat for the next time steps</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<video controls >
+  <source src="attention_tensor_dance.mp4" type="video/mp4">
+</video>
+<p>This is another way to look at which part of the input sentence we&rsquo;re paying attention to at each decoding step:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<video controls >
+  <source src="seq2seq_9.mp4" type="video/mp4">
+</video>
+<p>Note that the model isn&rsquo;t just mindless aligning the first word at the output with the first word from the input. It actually learned from the training phase how to align words in that language pair (French and English in our example). An example for how precise this mechanism can be comes from the attention papers listed above:</p>
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-you-can-see-how-the-model-paid-attention-correctly-when-outputing-european-economic-area-in-french-the-order-of-these-words-is-reversed-européenne-économique-zone-as-compared-to-english-every-other-word-in-the-sentence-is-in-similar-order">
+
+
+  <a data-fancybox="" href="/post/attention/attention_sentence_hu9a38ed3c48ed5954b46a7f19ef9a39e3_54758_2000x2000_fit_lanczos_2.png" data-caption="You can see how the model paid attention correctly when outputing &lt;strong&gt;European Economic Area&lt;/strong&gt;. In French, the order of these words is reversed (&lt;em&gt;européenne économique zone&lt;/em&gt;) as compared to English. Every other word in the sentence is in similar order.">
+
+
+  <img data-src="/post/attention/attention_sentence_hu9a38ed3c48ed5954b46a7f19ef9a39e3_54758_2000x2000_fit_lanczos_2.png" class="lazyload" alt="" width="634" height="647">
+</a>
+
+
+  
+  
+  <figcaption>
+    You can see how the model paid attention correctly when outputing <strong>European Economic Area</strong>. In French, the order of these words is reversed (<em>européenne économique zone</em>) as compared to English. Every other word in the sentence is in similar order.
+  </figcaption>
+
+
+</figure>
+
+<p>You can check TensorFlow&rsquo;s 
+<a href="https://github.com/tensorflow/nmt" target="_blank" rel="noopener">Neural Machine Translation (seq2seq) Tutorial</a>.</p>
 
     </div>
 

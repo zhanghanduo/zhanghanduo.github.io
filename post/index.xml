@@ -24,6 +24,7 @@
 &lt;nav id=&#34;TableOfContents&#34;&gt;
   &lt;ul&gt;
     &lt;li&gt;&lt;a href=&#34;#architecture&#34;&gt;Architecture&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#attention-mechanism&#34;&gt;Attention Mechanism&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/nav&gt;
 &lt;p&gt;Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. 
@@ -32,11 +33,7 @@
 &lt;a href=&#34;http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Cho et al., 2014&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&amp;hellip;etc) and outputs another sequence of items.&lt;/p&gt;
 &lt;p&gt;In neural machine translation, a sequence is a series of words, processed one after another. The output is, likewise, a series of words:&lt;/p&gt;
-&lt;video width=&#34;100%&#34; height=&#34;auto&#34; loop autoplay controls&gt;
-  &lt;source src=&#34;seq2seq_2.mp4&#34; type=&#34;video/mp4&#34;&gt;
-  Your browser does not support the video tag.
-&lt;/video&gt;
-&lt;!-- 
+
 
 
 
@@ -53,7 +50,7 @@
 
 &lt;video controls &gt;
   &lt;source src=&#34;seq2seq_2.mp4&#34; type=&#34;video/mp4&#34;&gt;
-&lt;/video&gt; --&gt;
+&lt;/video&gt;
 &lt;h2 id=&#34;architecture&#34;&gt;Architecture&lt;/h2&gt;
 &lt;p&gt;The model is composed of an &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt; and a &lt;span class=&#34;markup-quote&#34;&gt;decoder&lt;/span&gt;. The &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt; processes each item in the input sequence and compiles the information into a vector (called the &lt;span class=&#34;markup-quote&#34;&gt;context&lt;/span&gt; ). After processing the input sequence, the &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt; sends the &lt;span class=&#34;markup-quote&#34;&gt;context&lt;/span&gt; over to the &lt;span class=&#34;markup-quote&#34;&gt;decoder&lt;/span&gt; , which produces the output sequence item by item.&lt;/p&gt;
 
@@ -194,7 +191,7 @@
 &lt;/video&gt;
 &lt;p&gt;The next RNN step takes the second input vector and hidden state #1 to create the output of that time step. Later in the post, we&amp;rsquo;ll use an animation like this to describe the vectors inside a neural machine translation model.&lt;/p&gt;
 &lt;p&gt;In the following visualization, each pulse for the &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt; or &lt;span class=&#34;markup-quote&#34;&gt;decoder&lt;/span&gt;  is that RNN processing its inputs and generating an output for that time step. Since the &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt; and &lt;span class=&#34;markup-quote&#34;&gt;decoder&lt;/span&gt; are both RNNs, each time step one of the RNNs does some processing, it updates its &lt;span class=&#34;markup-quote&#34;&gt;hidden state&lt;/span&gt;  based on its inputs and previous inputs it has seen.&lt;/p&gt;
-&lt;p&gt;Let&amp;rsquo;s look at the &lt;span class=&#34;markup-quote&#34;&gt;hidden states&lt;/span&gt;  for the &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt;. Notice how the last &lt;span class=&#34;markup-quote&#34;&gt;hidden state&lt;/span&gt;  is actually the &lt;span class=&#34;markup-quote&#34;&gt;context&lt;/span&gt;  we pass along to the &lt;span class=&#34;markup-quote&#34;&gt;decoder&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s look at the &lt;span class=&#34;markup-quote&#34;&gt;hidden states&lt;/span&gt; for the &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt;. Notice how the last &lt;span class=&#34;markup-quote&#34;&gt;hidden state&lt;/span&gt;  is actually the &lt;span class=&#34;markup-quote&#34;&gt;context&lt;/span&gt;  we pass along to the &lt;span class=&#34;markup-quote&#34;&gt;decoder&lt;/span&gt;.&lt;/p&gt;
 
 
 
@@ -233,7 +230,7 @@
 &lt;video controls &gt;
   &lt;source src=&#34;seq2seq_6.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
-&lt;h1 id=&#34;attention-mechanism&#34;&gt;Attention Mechanism&lt;/h1&gt;
+&lt;h2 id=&#34;attention-mechanism&#34;&gt;Attention Mechanism&lt;/h2&gt;
 &lt;p&gt;The &lt;span class=&#34;markup-quote&#34;&gt;context&lt;/span&gt; vector turned out to be a bottleneck for these types of models. It made it challenging for the models to deal with long sentences. A solution was proposed in 
 &lt;a href=&#34;https://arxiv.org/abs/1409.0473&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Bahdanau et al., 2014&lt;/a&gt; and 
 &lt;a href=&#34;https://arxiv.org/abs/1508.04025&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Luong et al., 2015&lt;/a&gt;. These papers introduced and refined a technique called &amp;ldquo;Attention&amp;rdquo;, which highly improved the quality of machine translation systems. Attention allows the model to focus on the relevant parts of the input sequence as needed.&lt;/p&gt;
@@ -275,6 +272,137 @@
 &lt;/figure&gt;
 
 &lt;p&gt;Let&amp;rsquo;s continue looking at attention models at this high level of abstraction. An attention model differs from a classic sequence-to-sequence model in two main ways:&lt;/p&gt;
+&lt;p&gt;First, the encoder passes a lot more data to the decoder. Instead of passing the last hidden state of the encoding stage, the encoder passes &lt;em&gt;all&lt;/em&gt; the hidden states to the decoder:&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+&lt;video controls &gt;
+  &lt;source src=&#34;seq2seq_7.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+&lt;p&gt;Second, an attention decoder does an extra step before producing its output. In order to focus on the parts of the input that are relevant to this decoding time step, the decoder does the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Look at the set of encoder &lt;span class=&#34;markup-quote&#34;&gt;hidden states&lt;/span&gt; it received &amp;ndash; each encoder hidden states  is most associated with a certain word in the input sentence&lt;/li&gt;
+&lt;li&gt;Give each &lt;span class=&#34;markup-quote&#34;&gt;hidden states&lt;/span&gt; a score (let&amp;rsquo;s ignore how the scoring is done for now)&lt;/li&gt;
+&lt;li&gt;Multiply each &lt;span class=&#34;markup-quote&#34;&gt;hidden states&lt;/span&gt; by its softmaxed score, thus amplifying &lt;span class=&#34;markup-quote&#34;&gt;hidden states&lt;/span&gt; with high scores, and drowning out &lt;span class=&#34;markup-quote&#34;&gt;hidden states&lt;/span&gt; with low scores&lt;/li&gt;
+&lt;/ol&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+&lt;video controls &gt;
+  &lt;source src=&#34;attention_process.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+&lt;p&gt;This scoring exercise is done at each time step on the &lt;span class=&#34;markup-quote&#34;&gt;decoder&lt;/span&gt; side.&lt;/p&gt;
+&lt;p&gt;Let us now bring the whole thing together in the following visualization and look at how the attention process works:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The attention decoder RNN takes in the embedding of the &amp;lt;END&amp;gt; token, and an initial decoder hidden state.&lt;/li&gt;
+&lt;li&gt;The RNN processes its inputs, producing an output and a new hidden state vector (h4). The output is discarded.&lt;/li&gt;
+&lt;li&gt;Attention Step: We use the encoder hidden states and the h4 vector to calculate a context vector (C4) for this time step.&lt;/li&gt;
+&lt;li&gt;We concatenate h4 and C4 into one vector.&lt;/li&gt;
+&lt;li&gt;We pass this vector through a &lt;span class=&#34;markup-quote&#34;&gt;feedforward neural network&lt;/span&gt; (one trained jointly with the model).&lt;/li&gt;
+&lt;li&gt;The output of the feedforward neural networks indicates the output word of this time step.&lt;/li&gt;
+&lt;li&gt;Repeat for the next time steps&lt;/li&gt;
+&lt;/ol&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+&lt;video controls &gt;
+  &lt;source src=&#34;attention_tensor_dance.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+&lt;p&gt;This is another way to look at which part of the input sentence we&amp;rsquo;re paying attention to at each decoding step:&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+&lt;video controls &gt;
+  &lt;source src=&#34;seq2seq_9.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+&lt;p&gt;Note that the model isn&amp;rsquo;t just mindless aligning the first word at the output with the first word from the input. It actually learned from the training phase how to align words in that language pair (French and English in our example). An example for how precise this mechanism can be comes from the attention papers listed above:&lt;/p&gt;
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-you-can-see-how-the-model-paid-attention-correctly-when-outputing-european-economic-area-in-french-the-order-of-these-words-is-reversed-européenne-économique-zone-as-compared-to-english-every-other-word-in-the-sentence-is-in-similar-order&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://zhanghanduo.github.io/post/attention/attention_sentence_hu9a38ed3c48ed5954b46a7f19ef9a39e3_54758_2000x2000_fit_lanczos_2.png&#34; data-caption=&#34;You can see how the model paid attention correctly when outputing &amp;lt;strong&amp;gt;European Economic Area&amp;lt;/strong&amp;gt;. In French, the order of these words is reversed (&amp;lt;em&amp;gt;européenne économique zone&amp;lt;/em&amp;gt;) as compared to English. Every other word in the sentence is in similar order.&#34;&gt;
+
+
+  &lt;img data-src=&#34;https://zhanghanduo.github.io/post/attention/attention_sentence_hu9a38ed3c48ed5954b46a7f19ef9a39e3_54758_2000x2000_fit_lanczos_2.png&#34; class=&#34;lazyload&#34; alt=&#34;&#34; width=&#34;634&#34; height=&#34;647&#34;&gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    You can see how the model paid attention correctly when outputing &lt;strong&gt;European Economic Area&lt;/strong&gt;. In French, the order of these words is reversed (&lt;em&gt;européenne économique zone&lt;/em&gt;) as compared to English. Every other word in the sentence is in similar order.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;You can check TensorFlow&amp;rsquo;s 
+&lt;a href=&#34;https://github.com/tensorflow/nmt&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Neural Machine Translation (seq2seq) Tutorial&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
