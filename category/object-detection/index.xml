@@ -5,7 +5,7 @@
     <link>https://zhanghanduo.github.io/category/object-detection/</link>
       <atom:link href="https://zhanghanduo.github.io/category/object-detection/index.xml" rel="self" type="application/rss+xml" />
     <description>Object Detection</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 20 Aug 2018 16:21:12 +0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 20 Aug 2018 12:58:12 +0800</lastBuildDate>
     <image>
       <url>https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Object Detection</title>
@@ -15,7 +15,7 @@
     <item>
       <title>You only look once (YOLO) -- (2)</title>
       <link>https://zhanghanduo.github.io/post/yolov2/</link>
-      <pubDate>Mon, 20 Aug 2018 16:21:12 +0800</pubDate>
+      <pubDate>Mon, 20 Aug 2018 12:58:12 +0800</pubDate>
       <guid>https://zhanghanduo.github.io/post/yolov2/</guid>
       <description>&lt;p&gt;YOLO has higher localization errors and the recall (measure how good to locate all objects) is lower, compared to SSD. YOLOv2 is the second version of the YOLO with the objective of improving the accuracy significantly while making it faster.&lt;/p&gt;
 &lt;p&gt;The backbone network architecture of YOLO v2 is as follows:

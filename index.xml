@@ -21,17 +21,24 @@
 &lt;a href=&#34;https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;using&lt;/a&gt; such a model in production in late 2016. These models are explained in the two pioneering papers (
 &lt;a href=&#34;https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sutskever et al., 2014&lt;/a&gt;, 
 &lt;a href=&#34;http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Cho et al., 2014&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&amp;hellip;etc) and outputs another sequence of items. A trained model would work like this:
-&lt;video width=&#34;100%&#34; height=&#34;auto&#34; loop autoplay controls&gt;&lt;/p&gt;
-  &lt;source src=&#34;https://zhanghanduo.github.io/img/seq/seq2seq_1.mp4&#34; type=&#34;video/mp4&#34;&gt;
-  Your browser does not support the video tag.
-&lt;/video&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&amp;hellip;etc) and outputs another sequence of items.&lt;/p&gt;
 &lt;p&gt;In neural machine translation, a sequence is a series of words, processed one after another. The output is, likewise, a series of words:&lt;/p&gt;
 &lt;video width=&#34;100%&#34; height=&#34;auto&#34; loop autoplay controls&gt;
   &lt;source src=&#34;https://zhanghanduo.github.io/img/seq/seq2seq_2.mp4&#34; type=&#34;video/mp4&#34;&gt;
   Your browser does not support the video tag.
-&lt;/video&gt;</description>
+&lt;/video&gt;
+&lt;h2 id=&#34;architecture&#34;&gt;Architecture&lt;/h2&gt;
+&lt;p&gt;The model is composed of an &lt;em&gt;encoder&lt;/em&gt; and a &lt;em&gt;decoder&lt;/em&gt;. The encoder processes each item in the input sequence and compiles the information into a vector (called the &lt;span class=&#34;context&#34;&gt;context&lt;/span&gt;). After processing the input sequence, the encoder sends the &amp;ldquo;context&amp;rdquo; over to the &lt;em&gt;decoder&lt;/em&gt;, which produces the output sequence item by item.&lt;/p&gt;
+&lt;video width=&#34;100%&#34; height=&#34;auto&#34; loop autoplay  controls&gt;
+  &lt;source src=&#34;https://zhanghanduo.github.io/img/seq/seq2seq_3.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  Your browser does not support the video tag.
+&lt;/video&gt;
+&lt;p&gt;The same applies in the case of machine translation.&lt;/p&gt;
+&lt;video width=&#34;100%&#34; height=&#34;auto&#34; loop autoplay controls&gt;
+  &lt;source src=&#34;https://zhanghanduo.github.io/img/seq/seq2seq_4.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  Your browser does not support the video tag.
+&lt;/video&gt;
+</description>
     </item>
     
     <item>
@@ -271,7 +278,7 @@ pkg-config --modversion opencv	//check if opencv is installed and its version
     <item>
       <title>You only look once (YOLO) -- (2)</title>
       <link>https://zhanghanduo.github.io/post/yolov2/</link>
-      <pubDate>Mon, 20 Aug 2018 16:21:12 +0800</pubDate>
+      <pubDate>Mon, 20 Aug 2018 12:58:12 +0800</pubDate>
       <guid>https://zhanghanduo.github.io/post/yolov2/</guid>
       <description>&lt;p&gt;YOLO has higher localization errors and the recall (measure how good to locate all objects) is lower, compared to SSD. YOLOv2 is the second version of the YOLO with the objective of improving the accuracy significantly while making it faster.&lt;/p&gt;
 &lt;p&gt;The backbone network architecture of YOLO v2 is as follows:

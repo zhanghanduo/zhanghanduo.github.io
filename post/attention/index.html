@@ -27,15 +27,7 @@
   
     
   
-  <meta name="description" content="Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
-using such a model in production in late 2016. These models are explained in the two pioneering papers (
-Sutskever et al., 2014, 
-Cho et al., 2014).
-A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items. A trained model would work like this:
-
-  
-  Your browser does not support the video tag.
-">
+  <meta name="description" content="Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started using such a model in production in late 2016.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://zhanghanduo.github.io/post/attention/">
@@ -283,15 +275,7 @@ A sequence-to-sequence model is a model that takes a sequence of items (words, l
   <meta property="og:site_name" content="Zhang Handuo&#39;s Site">
   <meta property="og:url" content="https://zhanghanduo.github.io/post/attention/">
   <meta property="og:title" content="Seq2seq Model with Attention | Zhang Handuo&#39;s Site">
-  <meta property="og:description" content="Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
-using such a model in production in late 2016. These models are explained in the two pioneering papers (
-Sutskever et al., 2014, 
-Cho et al., 2014).
-A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items. A trained model would work like this:
-
-  
-  Your browser does not support the video tag.
-"><meta property="og:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg">
+  <meta property="og:description" content="Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started using such a model in production in late 2016."><meta property="og:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg">
   <meta property="twitter:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg"><meta property="og:locale" content="en-us">
   
     
@@ -332,6 +316,11 @@ A sequence-to-sequence model is a model that takes a sequence of items (words, l
   "datePublished": "2020-06-01T12:58:12+08:00",
   "dateModified": "2020-06-01T12:58:12+08:00",
   
+  "author": {
+    "@type": "Person",
+    "name": "Handuo"
+  },
+  
   "publisher": {
     "@type": "Organization",
     "name": "Zhang Handuo's Site",
@@ -340,7 +329,7 @@ A sequence-to-sequence model is a model that takes a sequence of items (words, l
       "url": "https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "\u003cp\u003eSequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started \n\u003ca href=\"https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/\" target=\"_blank\" rel=\"noopener\"\u003eusing\u003c/a\u003e such a model in production in late 2016. These models are explained in the two pioneering papers (\n\u003ca href=\"https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf\" target=\"_blank\" rel=\"noopener\"\u003eSutskever et al., 2014\u003c/a\u003e, \n\u003ca href=\"http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf\" target=\"_blank\" rel=\"noopener\"\u003eCho et al., 2014\u003c/a\u003e).\u003c/p\u003e\n\u003cp\u003eA sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images\u0026hellip;etc) and outputs another sequence of items. A trained model would work like this:\n\u003cvideo width=\"100%\" height=\"auto\" loop autoplay controls\u003e\u003c/p\u003e\n  \u003csource src=\"/img/seq/seq2seq_1.mp4\" type=\"video/mp4\"\u003e\n  Your browser does not support the video tag.\n\u003c/video\u003e"
+  "description": "Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started using such a model in production in late 2016."
 }
 </script>
 
@@ -656,22 +645,38 @@ A sequence-to-sequence model is a model that takes a sequence of items (words, l
 
 
 
-  
+
+
+
+
+
+
+
 
   
   
-  
+
+
 <div class="article-container pt-3">
   <h1>Seq2seq Model with Attention</h1>
 
   
 
   
-    
 
 
 <div class="article-metadata">
 
+  
+  
+  
+  
+  <div>
+    
+
+  
+  <span><a href="/author/handuo/">Handuo</a></span>
+  </div>
   
   
 
@@ -707,22 +712,29 @@ A sequence-to-sequence model is a model that takes a sequence of items (words, l
 
 </div>
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 600px; max-height: 114px;">
+  <div style="position: relative">
+    <img src="/post/attention/featured.jpg" alt="" class="featured-image">
+    
+  </div>
 </div>
 
 
@@ -734,17 +746,24 @@ A sequence-to-sequence model is a model that takes a sequence of items (words, l
 <a href="https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/" target="_blank" rel="noopener">using</a> such a model in production in late 2016. These models are explained in the two pioneering papers (
 <a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf" target="_blank" rel="noopener">Sutskever et al., 2014</a>, 
 <a href="http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf" target="_blank" rel="noopener">Cho et al., 2014</a>).</p>
-<p>A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items. A trained model would work like this:
-<video width="100%" height="auto" loop autoplay controls></p>
-  <source src="/img/seq/seq2seq_1.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-<p><br /></p>
+<p>A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items.</p>
 <p>In neural machine translation, a sequence is a series of words, processed one after another. The output is, likewise, a series of words:</p>
 <video width="100%" height="auto" loop autoplay controls>
   <source src="/img/seq/seq2seq_2.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+<h2 id="architecture">Architecture</h2>
+<p>The model is composed of an <em>encoder</em> and a <em>decoder</em>. The encoder processes each item in the input sequence and compiles the information into a vector (called the <span class="context">context</span>). After processing the input sequence, the encoder sends the &ldquo;context&rdquo; over to the <em>decoder</em>, which produces the output sequence item by item.</p>
+<video width="100%" height="auto" loop autoplay  controls>
+  <source src="/img/seq/seq2seq_3.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>The same applies in the case of machine translation.</p>
+<video width="100%" height="auto" loop autoplay controls>
+  <source src="/img/seq/seq2seq_4.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
     </div>
 
     
@@ -859,152 +878,17 @@ A sequence-to-sequence model is a model that takes a sequence of items (words, l
 
 
   
-  
+    
+    
 
 
 
 
 
   
-    
-    
-    
-      
-    
-    
-    
-    <div class="media author-card content-widget-hr">
-      
-        
-        <img class="avatar mr-3 avatar-circle" src="/author/avatar_hu719473944e5fc214027c554540953267_304543_270x270_fill_q90_lanczos_center.jpg" alt="">
-      
-
-      <div class="media-body">
-        <h5 class="card-title"><a href="https://zhanghanduo.github.io/"></a></h5>
-        <h6 class="card-subtitle">PhD Student of Robot Vison and Localization</h6>
-        <p class="card-text">My research interests include Robotics visioin, visual SLAM, object detection and sensor fusion with the assis of AI.</p>
-        <ul class="network-icon" aria-hidden="true">
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="/#contact" >
-        <i class="fas fa-envelope"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-    <li>
-      <a href="weixin://dl/chat?%7bhanduo8997%7d" >
-        <i class="fab fa-weixin"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://twitter.com/christlurker" target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://t.me/christlurker" target="_blank" rel="noopener">
-        <i class="fab fa-telegram"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://scholar.google.com.sg/citations?user=je6o_J4AAAAJ&amp;hl=en" target="_blank" rel="noopener">
-        <i class="ai ai-google-scholar"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://github.com/zhanghanduo" target="_blank" rel="noopener">
-        <i class="fab fa-github"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="/files/handuo_resume_.pdf" >
-        <i class="ai ai-cv"></i>
-      </a>
-    </li>
-  
-</ul>
-
-      </div>
-    </div>
-  
 
 
+  
 
 
 
