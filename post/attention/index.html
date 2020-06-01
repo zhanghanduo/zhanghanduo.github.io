@@ -700,7 +700,7 @@ Sequence-to-sequence models are deep learning models that have achieved a lot of
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    2 min read
+    4 min read
   </span>
   
 
@@ -817,10 +817,6 @@ Sequence-to-sequence models are deep learning models that have achieved a lot of
 </video>
 <p>RNN (recurrent neural network) is shown as an illustration here to be the model of both <span class="markup-quote">encoder</span> and <span class="markup-quote">decoder</span> (Be sure to check out Luis Serrano&rsquo;s 
 <a href="https://www.youtube.com/watch?v=UNmqTiOnRfg" target="_blank" rel="noopener">A friendly introduction to Recurrent Neural Networks</a> for an intro to RNNs).</p>
-<!-- <div class="img-div" markdown="0">
-    <img src="/img/seq/context.png" />
-    The <span color="red" class="context">context</span>  is a vector of floats. Later in this post we will visualize vectors in color by assigning brighter colors to the cells with higher values.
-</div> -->
 
 
 
@@ -859,6 +855,148 @@ Sequence-to-sequence models are deep learning models that have achieved a lot of
 </figure>
 
 <p>You can set the size of the <span class="markup-quote">context</span> vector when you set up your model. It is basically the number of hidden units in the <span class="markup-quote">encoder</span> RNN. These visualizations show a vector of size 4, but in real world applications the <span class="markup-quote">context</span> vector would be of a size like 256, 512, or 1024.</p>
+<p>By design, a RNN takes two inputs at each time step: an input (in the case of the encoder, one word from the input sentence), and a hidden state. The word, however, needs to be represented by a vector. To transform a word into a vector, we turn to the class of methods called &ldquo;
+<a href="https://machinelearningmastery.com/what-are-word-embeddings/" target="_blank" rel="noopener">word embedding</a>&rdquo; algorithms. These turn words into vector spaces that capture a lot of the meaning/semantic information of the words (e.g. 
+<a href="http://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html" target="_blank" rel="noopener">king - man + woman = queen</a>).</p>
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-we-need-to-turn-the-input-words-into-vectors-before-processing-them-that-transformation-is-done-using-a-word-embedding-algorithm-we-can-use-pre-trained-embeddingshttpahogrammercom20170120the-list-of-pretrained-word-embeddings-or-train-our-own-embedding-on-our-dataset-embedding-vectors-of-size-200-or-300-are-typical-were-showing-a-vector-of-size-four-for-simplicity">
+
+
+  <a data-fancybox="" href="/post/attention/embedding_hue52ea6887e4ffd78961218df5eff4111_41024_2000x2000_fit_lanczos_2.png" data-caption="We need to turn the input words into vectors before processing them. That transformation is done using a &lt;strong&gt;word embedding&lt;/strong&gt; algorithm. We can use &lt;a href=&#34;http://ahogrammer.com/2017/01/20/the-list-of-pretrained-word-embeddings/&#34;&gt;pre-trained embeddings&lt;/a&gt; or train our own embedding on our dataset. Embedding vectors of size 200 or 300 are typical, we&amp;rsquo;re showing a vector of size four for simplicity.">
+
+
+  <img data-src="/post/attention/embedding_hue52ea6887e4ffd78961218df5eff4111_41024_2000x2000_fit_lanczos_2.png" class="lazyload" alt="" width="1079" height="352">
+</a>
+
+
+  
+  
+  <figcaption>
+    We need to turn the input words into vectors before processing them. That transformation is done using a <strong>word embedding</strong> algorithm. We can use <a href="http://ahogrammer.com/2017/01/20/the-list-of-pretrained-word-embeddings/">pre-trained embeddings</a> or train our own embedding on our dataset. Embedding vectors of size 200 or 300 are typical, we&rsquo;re showing a vector of size four for simplicity.
+  </figcaption>
+
+
+</figure>
+
+<p>Now that we&rsquo;ve introduced our main vectors/tensors, let&rsquo;s recap the mechanics of an RNN and establish a visual language to describe these models:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<video controls >
+  <source src="RNN_1.mp4" type="video/mp4">
+</video>
+<p>The next RNN step takes the second input vector and hidden state #1 to create the output of that time step. Later in the post, we&rsquo;ll use an animation like this to describe the vectors inside a neural machine translation model.</p>
+<p>In the following visualization, each pulse for the <span class="markup-quote">encoder</span> or <span class="markup-quote">decoder</span>  is that RNN processing its inputs and generating an output for that time step. Since the <span class="markup-quote">encoder</span> and <span class="markup-quote">decoder</span> are both RNNs, each time step one of the RNNs does some processing, it updates its <span class="markup-quote">hidden state</span>  based on its inputs and previous inputs it has seen.</p>
+<p>Let&rsquo;s look at the <span class="markup-quote">hidden states</span>  for the <span class="markup-quote">encoder</span>. Notice how the last <span class="markup-quote">hidden state</span>  is actually the <span class="markup-quote">context</span>  we pass along to the <span class="markup-quote">decoder</span>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<video controls >
+  <source src="seq2seq_5.mp4" type="video/mp4">
+</video>
+<p>The <span class="markup-quote">decoder</span> also maintains a <span class="markup-quote">hidden states</span> that it passes from one time step to the next. We just didn&rsquo;t visualize it in this graphic because we&rsquo;re concerned with the major parts of the model for now.</p>
+<p>Let&rsquo;s now look at another way to visualize a sequence-to-sequence model. This animation will make it easier to understand the static graphics that describe these models. This is called an &ldquo;unrolled&rdquo; view where instead of showing the one <span class="markup-quote">decoder</span>, we show a copy of it for each time step. This way we can look at the inputs and outputs of each time step.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<video controls >
+  <source src="seq2seq_6.mp4" type="video/mp4">
+</video>
+<h1 id="attention-mechanism">Attention Mechanism</h1>
+<p>The <span class="markup-quote">context</span> vector turned out to be a bottleneck for these types of models. It made it challenging for the models to deal with long sentences. A solution was proposed in 
+<a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="noopener">Bahdanau et al., 2014</a> and 
+<a href="https://arxiv.org/abs/1508.04025" target="_blank" rel="noopener">Luong et al., 2015</a>. These papers introduced and refined a technique called &ldquo;Attention&rdquo;, which highly improved the quality of machine translation systems. Attention allows the model to focus on the relevant parts of the input sequence as needed.</p>
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-at-time-step-7-the-attention-mechanism-enables-the-decoder-to-focus-on-the-word-étudiant-student-in-french-before-it-generates-the-english-translation-this-ability-to-amplify-the-signal-from-the-relevant-part-of-the-input-sequence-makes-attention-models-produce-better-results-than-models-without-attention">
+
+
+  <a data-fancybox="" href="/post/attention/attention_hu3a304cc6d98049bbd17d98bab91c60b0_73300_2000x2000_fit_lanczos_2.png" data-caption="At time step 7, the attention mechanism enables the &lt;strong&gt;decoder&lt;/strong&gt; to focus on the word &lt;strong&gt;étudiant&lt;/strong&gt; (&lt;em&gt;student&lt;/em&gt; in french) before it generates the English translation. This ability to amplify the signal from the relevant part of the input sequence makes attention models produce better results than models without attention.">
+
+
+  <img data-src="/post/attention/attention_hu3a304cc6d98049bbd17d98bab91c60b0_73300_2000x2000_fit_lanczos_2.png" class="lazyload" alt="" width="1440" height="396">
+</a>
+
+
+  
+  
+  <figcaption>
+    At time step 7, the attention mechanism enables the <strong>decoder</strong> to focus on the word <strong>étudiant</strong> (<em>student</em> in french) before it generates the English translation. This ability to amplify the signal from the relevant part of the input sequence makes attention models produce better results than models without attention.
+  </figcaption>
+
+
+</figure>
+
+<p>Let&rsquo;s continue looking at attention models at this high level of abstraction. An attention model differs from a classic sequence-to-sequence model in two main ways:</p>
 
     </div>
 
