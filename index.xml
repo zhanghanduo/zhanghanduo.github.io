@@ -21,6 +21,9 @@
 &lt;p&gt;Digested and reproduced from &lt;a href=&#34;https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/&#34;&gt;Visualizing A Neural Machine Translation Model&lt;/a&gt; by Jay Alammar.&lt;/p&gt;
 &lt;/blockquote&gt;
 
+&lt;p&gt;&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;/p&gt;
+
 &lt;p&gt;Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. &lt;a href=&#34;https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/&#34;&gt;Google Translate&lt;/a&gt; started  using such a model in production in late 2016. These models are explained in the two pioneering papers (&lt;a href=&#34;https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf&#34;&gt;Sutskever et al., 2014&lt;/a&gt;, &lt;a href=&#34;http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf&#34;&gt;Cho et al., 2014&lt;/a&gt;).&lt;/p&gt;
 
 &lt;p&gt;A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images...etc) and outputs another sequence of items.&lt;/p&gt;
@@ -46,10 +49,7 @@
   &lt;source src=&#34;seq2seq_2.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 
-&lt;p&gt;&lt;h2&gt;Table of Contents&lt;/h2&gt;
-&lt;/p&gt;
-
-&lt;h2 id=&#34;architecture-of-seq2seq&#34;&gt;Architecture of Seq2seq&lt;/h2&gt;
+&lt;h2 id=&#34;1-architecture-of-seq2seq&#34;&gt;1. Architecture of Seq2seq&lt;/h2&gt;
 
 &lt;p&gt;The model is composed of an &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt; and a &lt;span class=&#34;markup-quote&#34;&gt;decoder&lt;/span&gt;. The &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt; processes each item in the input sequence and compiles the information into a vector (called the &lt;span class=&#34;markup-quote&#34;&gt;context&lt;/span&gt; ). After processing the input sequence, the &lt;span class=&#34;markup-quote&#34;&gt;encoder&lt;/span&gt; sends the &lt;span class=&#34;markup-quote&#34;&gt;context&lt;/span&gt; over to the &lt;span class=&#34;markup-quote&#34;&gt;decoder&lt;/span&gt; , which produces the output sequence item by item.&lt;/p&gt;
 
@@ -244,7 +244,7 @@
   &lt;source src=&#34;seq2seq_6.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 
-&lt;h2 id=&#34;attention-mechanism&#34;&gt;Attention Mechanism&lt;/h2&gt;
+&lt;h2 id=&#34;2-attention-mechanism&#34;&gt;2. Attention Mechanism&lt;/h2&gt;
 
 &lt;p&gt;Attention is a generalized pooling method with. The core component in the attention mechanism is the attention layer, or called attention for simplicity. An input of the attention layer is called a query. For a query, attention returns an o bias alignment over inputsutput based on the memory — a set of key-value pairs encoded in the attention layer. To be more specific, assume that the memory contains $n$ key-value pairs, $(k_1, v_1), \cdots, (k_n, v_n)$ with $\mathbf{k}\in{ \mathbb{R}^{d_k}}, \mathbf{v}\in{ \mathbb{R}^{d_v}}$. Given a query $\mathbf{q}\in \mathbb{R}^{d_q}$, the attention layer returns an output $\mathbf{o}\in{ \mathbb{R}^{d_v}} $ with the same shape as the value.&lt;/p&gt;
 

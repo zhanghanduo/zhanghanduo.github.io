@@ -28,7 +28,7 @@
     
   
   <meta name="description" content="Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.
- Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning.">
+ Table of Contents Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://zhanghanduo.github.io/post/attention/">
@@ -280,7 +280,7 @@
   <meta property="og:url" content="https://zhanghanduo.github.io/post/attention/">
   <meta property="og:title" content="Seq2seq Model with Attention | Zhang Handuo&#39;s Site">
   <meta property="og:description" content="Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.
- Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."><meta property="og:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg">
+ Table of Contents Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."><meta property="og:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg">
   <meta property="twitter:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg"><meta property="og:locale" content="en-us">
   
     
@@ -334,7 +334,7 @@
       "url": "https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.\n Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."
+  "description": "Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.\n Table of Contents Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."
 }
 </script>
 
@@ -751,6 +751,9 @@
 <p>Digested and reproduced from <a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Visualizing A Neural Machine Translation Model</a> by Jay Alammar.</p>
 </blockquote>
 
+<p><h2>Table of Contents</h2>
+</p>
+
 <p>Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. <a href="https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/">Google Translate</a> started  using such a model in production in late 2016. These models are explained in the two pioneering papers (<a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf">Sutskever et al., 2014</a>, <a href="http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf">Cho et al., 2014</a>).</p>
 
 <p>A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images...etc) and outputs another sequence of items.</p>
@@ -776,10 +779,7 @@
   <source src="seq2seq_2.mp4" type="video/mp4">
 </video>
 
-<p><h2>Table of Contents</h2>
-</p>
-
-<h2 id="architecture-of-seq2seq">Architecture of Seq2seq</h2>
+<h2 id="1-architecture-of-seq2seq">1. Architecture of Seq2seq</h2>
 
 <p>The model is composed of an <span class="markup-quote">encoder</span> and a <span class="markup-quote">decoder</span>. The <span class="markup-quote">encoder</span> processes each item in the input sequence and compiles the information into a vector (called the <span class="markup-quote">context</span> ). After processing the input sequence, the <span class="markup-quote">encoder</span> sends the <span class="markup-quote">context</span> over to the <span class="markup-quote">decoder</span> , which produces the output sequence item by item.</p>
 
@@ -974,7 +974,7 @@
   <source src="seq2seq_6.mp4" type="video/mp4">
 </video>
 
-<h2 id="attention-mechanism">Attention Mechanism</h2>
+<h2 id="2-attention-mechanism">2. Attention Mechanism</h2>
 
 <p>Attention is a generalized pooling method with. The core component in the attention mechanism is the attention layer, or called attention for simplicity. An input of the attention layer is called a query. For a query, attention returns an o bias alignment over inputsutput based on the memory — a set of key-value pairs encoded in the attention layer. To be more specific, assume that the memory contains $n$ key-value pairs, $(k_1, v_1), \cdots, (k_n, v_n)$ with $\mathbf{k}\in{ \mathbb{R}^{d_k}}, \mathbf{v}\in{ \mathbb{R}^{d_v}}$. Given a query $\mathbf{q}\in \mathbb{R}^{d_q}$, the attention layer returns an output $\mathbf{o}\in{ \mathbb{R}^{d_v}} $ with the same shape as the value.</p>
 
