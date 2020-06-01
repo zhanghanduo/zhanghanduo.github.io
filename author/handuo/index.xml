@@ -17,9 +17,10 @@
       <link>https://zhanghanduo.github.io/post/attention/</link>
       <pubDate>Mon, 01 Jun 2020 12:58:12 +0800</pubDate>
       <guid>https://zhanghanduo.github.io/post/attention/</guid>
-      <description>&lt;p&gt;Digested and reproduced from &lt;a href=&#34;https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/&#34;&gt;Visualizing A Neural Machine Translation Model&lt;/a&gt; by Jay Alammar.&lt;/p&gt;
+      <description>&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;Digested and reproduced from &amp;lt;a href=&amp;quot;https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/&amp;quot;&amp;gt;Visualizing A Neural Machine Translation Model&amp;lt;/a&amp;gt; by Jay Alammar.
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. 
-&lt;a href=&#34;https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Google Translate&lt;/a&gt; started such a model in production in late 2016. These models are explained in the two pioneering papers (
+&lt;a href=&#34;https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Google Translate&lt;/a&gt; started  using such a model in production in late 2016. These models are explained in the two pioneering papers (
 &lt;a href=&#34;https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sutskever et al., 2014&lt;/a&gt;, 
 &lt;a href=&#34;http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Cho et al., 2014&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&amp;hellip;etc) and outputs another sequence of items.&lt;/p&gt;
