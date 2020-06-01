@@ -27,10 +27,18 @@
   
     
   
-  <meta name="description" content="PhD Student of Robot Vison and Localization">
+  <meta name="description" content="Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
+using such a model in production in late 2016. These models are explained in the two pioneering papers (
+Sutskever et al., 2014, 
+Cho et al., 2014).
+A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items. A trained model would work like this:
 
   
-  <link rel="alternate" hreflang="en-us" href="https://zhanghanduo.github.io/404.html">
+  Your browser does not support the video tag.
+">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://zhanghanduo.github.io/post/attention/attention/">
 
   
 
@@ -255,7 +263,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="https://zhanghanduo.github.io/404.html">
+  <link rel="canonical" href="https://zhanghanduo.github.io/post/attention/attention/">
 
   
   
@@ -274,18 +282,66 @@
   <meta property="twitter:creator" content="@christlurker">
   
   <meta property="og:site_name" content="Zhang Handuo&#39;s Site">
-  <meta property="og:url" content="https://zhanghanduo.github.io/404.html">
-  <meta property="og:title" content="404 Page not found | Zhang Handuo&#39;s Site">
-  <meta property="og:description" content="PhD Student of Robot Vison and Localization"><meta property="og:image" content="https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="og:url" content="https://zhanghanduo.github.io/post/attention/attention/">
+  <meta property="og:title" content="Seq2seq Model with Attention | Zhang Handuo&#39;s Site">
+  <meta property="og:description" content="Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
+using such a model in production in late 2016. These models are explained in the two pioneering papers (
+Sutskever et al., 2014, 
+Cho et al., 2014).
+A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items. A trained model would work like this:
+
+  
+  Your browser does not support the video tag.
+"><meta property="og:image" content="https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
+      <meta property="article:published_time" content="2020-06-01T12:58:12&#43;08:00">
+    
+    <meta property="article:modified_time" content="2020-06-01T12:58:12&#43;08:00">
   
 
   
 
 
+    
 
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zhanghanduo.github.io/post/attention/attention/"
+  },
+  "headline": "Seq2seq Model with Attention",
+  
+  "datePublished": "2020-06-01T12:58:12+08:00",
+  "dateModified": "2020-06-01T12:58:12+08:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Zhang Handuo's Site",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "\u003cp\u003eSequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started \n\u003ca href=\"https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/\" target=\"_blank\" rel=\"noopener\"\u003eusing\u003c/a\u003e such a model in production in late 2016. These models are explained in the two pioneering papers (\n\u003ca href=\"https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf\" target=\"_blank\" rel=\"noopener\"\u003eSutskever et al., 2014\u003c/a\u003e, \n\u003ca href=\"http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf\" target=\"_blank\" rel=\"noopener\"\u003eCho et al., 2014\u003c/a\u003e).\u003c/p\u003e\n\u003cp\u003eA sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images\u0026hellip;etc) and outputs another sequence of items. A trained model would work like this:\n\u003cvideo width=\"100%\" height=\"auto\" loop autoplay controls\u003e\u003c/p\u003e\n  \u003csource src=\"/img/seq/seq2seq_1.mp4\" type=\"video/mp4\"\u003e\n  Your browser does not support the video tag.\n\u003c/video\u003e"
+}
+</script>
+
+  
 
   
 
@@ -293,10 +349,13 @@
   
 
 
+  
 
 
 
-  <title>404 Page not found | Zhang Handuo&#39;s Site</title>
+
+
+  <title>Seq2seq Model with Attention | Zhang Handuo&#39;s Site</title>
 
 </head>
 
@@ -579,51 +638,401 @@
 </nav>
 
 
-  <div class="universal-wrapper pt-3">
-
-  <h1>Page not found</h1>
-
-  
-  
-  <form class="d-flex align-items-center mb-3">
-    <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
-  </form>
-  
+  <article class="article">
 
   
 
-  <p>Perhaps you were looking for one of these?</p>
+
+
+
+
+
+
+
+
+
+
+
+  
 
   
   
   
-  <h2>Latest</h2>
-  <ul>
+<div class="article-container pt-3">
+  <h1>Seq2seq Model with Attention</h1>
+
+  
+
+  
     
-      <li><a href="/post/attention/attention/">Seq2seq Model with Attention</a></li>
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
     
-      <li><a href="/project/ugv/">Stereo Vision System on UGV</a></li>
     
-      <li><a href="/publication/multiple_tracking/">Multiple Object Tracking With Attention to Appearance, Structure, Motion and Size</a></li>
+      
     
-      <li><a href="/post/remote_edit/">How to remotely edit your project without having to use VIM</a></li>
-    
-      <li><a href="/publication/gmc/">GMC: Grid Based Motion Clustering in Dynamic Environment</a></li>
-    
-      <li><a href="/post/new_system/">Install new linux environment</a></li>
-    
-      <li><a href="/post/gpu_cloud/">Price and spec of cloud based GPU</a></li>
-    
-      <li><a href="/post/yolov2/yolo2/">You only look once (YOLO) -- (2)</a></li>
-    
-      <li><a href="/post/yolo1/">You only look once (YOLO) -- (1)</a></li>
-    
-      <li><a href="/post/clion/">CLion for catkin projects</a></li>
-    
-  </ul>
+    Jun 1, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    1 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/deep-learning-basics/">Deep Learning Basics</a></span>
   
 
 </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
+<a href="https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/" target="_blank" rel="noopener">using</a> such a model in production in late 2016. These models are explained in the two pioneering papers (
+<a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf" target="_blank" rel="noopener">Sutskever et al., 2014</a>, 
+<a href="http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf" target="_blank" rel="noopener">Cho et al., 2014</a>).</p>
+<p>A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items. A trained model would work like this:
+<video width="100%" height="auto" loop autoplay controls></p>
+  <source src="/img/seq/seq2seq_1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p><br /></p>
+<p>In neural machine translation, a sequence is a series of words, processed one after another. The output is, likewise, a series of words:</p>
+<video width="100%" height="auto" loop autoplay controls>
+  <source src="/img/seq/seq2seq_2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/ml/">ML</a>
+  
+  <a class="badge badge-light" href="/tag/notes/">Notes</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://zhanghanduo.github.io/post/attention/attention/&amp;text=Seq2seq%20Model%20with%20Attention" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://zhanghanduo.github.io/post/attention/attention/&amp;t=Seq2seq%20Model%20with%20Attention" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Seq2seq%20Model%20with%20Attention&amp;body=https://zhanghanduo.github.io/post/attention/attention/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://zhanghanduo.github.io/post/attention/attention/&amp;title=Seq2seq%20Model%20with%20Attention" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Seq2seq%20Model%20with%20Attention%20https://zhanghanduo.github.io/post/attention/attention/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://zhanghanduo.github.io/post/attention/attention/&amp;title=Seq2seq%20Model%20with%20Attention" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-circle" src="/author/avatar_hu719473944e5fc214027c554540953267_304543_270x270_fill_q90_lanczos_center.jpg" alt="">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="https://zhanghanduo.github.io/"></a></h5>
+        <h6 class="card-subtitle">PhD Student of Robot Vison and Localization</h6>
+        <p class="card-text">My research interests include Robotics visioin, visual SLAM, object detection and sensor fusion with the assis of AI.</p>
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="weixin://dl/chat?%7bhanduo8997%7d" >
+        <i class="fab fa-weixin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/christlurker" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://t.me/christlurker" target="_blank" rel="noopener">
+        <i class="fab fa-telegram"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com.sg/citations?user=je6o_J4AAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zhanghanduo" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/handuo_resume_.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/yolov2/yolo2/">You only look once (YOLO) -- (2)</a></li>
+      
+      <li><a href="/post/yolo1/">You only look once (YOLO) -- (1)</a></li>
+      
+      <li><a href="/post/pooling/">Pooling Layer in CNN (1)</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+  </div>
+</article>
 
       
 

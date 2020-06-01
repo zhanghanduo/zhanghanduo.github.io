@@ -3,6 +3,46 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://zhanghanduo.github.io/categories/</loc>
+    <lastmod>2020-06-01T12:58:12+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://zhanghanduo.github.io/category/deep-learning-basics/</loc>
+    <lastmod>2020-06-01T12:58:12+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://zhanghanduo.github.io/tag/ml/</loc>
+    <lastmod>2020-06-01T12:58:12+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://zhanghanduo.github.io/tag/notes/</loc>
+    <lastmod>2020-06-01T12:58:12+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://zhanghanduo.github.io/post/</loc>
+    <lastmod>2020-06-01T12:58:12+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://zhanghanduo.github.io/post/attention/attention/</loc>
+    <lastmod>2020-06-01T12:58:12+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://zhanghanduo.github.io/tags/</loc>
+    <lastmod>2020-06-01T12:58:12+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://zhanghanduo.github.io/</loc>
+    <lastmod>2020-06-01T12:58:12+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://zhanghanduo.github.io/tag/deep-learning/</loc>
     <lastmod>2019-08-20T00:00:00+00:00</lastmod>
   </url>
@@ -14,16 +54,6 @@
   
   <url>
     <loc>https://zhanghanduo.github.io/project/ugv/</loc>
-    <lastmod>2019-08-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://zhanghanduo.github.io/tags/</loc>
-    <lastmod>2019-08-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://zhanghanduo.github.io/</loc>
     <lastmod>2019-08-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -88,11 +118,6 @@
   </url>
   
   <url>
-    <loc>https://zhanghanduo.github.io/post/</loc>
-    <lastmod>2019-04-09T15:20:37+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://zhanghanduo.github.io/tag/tools/</loc>
     <lastmod>2019-04-09T15:20:37+08:00</lastmod>
   </url>
@@ -125,21 +150,6 @@
   <url>
     <loc>https://zhanghanduo.github.io/post/gpu_cloud/</loc>
     <lastmod>2018-10-29T14:17:43+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://zhanghanduo.github.io/categories/</loc>
-    <lastmod>2018-08-20T16:21:12+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://zhanghanduo.github.io/tag/ml/</loc>
-    <lastmod>2018-08-20T16:21:12+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://zhanghanduo.github.io/tag/notes/</loc>
-    <lastmod>2018-08-20T16:21:12+08:00</lastmod>
   </url>
   
   <url>
