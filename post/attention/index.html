@@ -28,7 +28,7 @@
     
   
   <meta name="description" content="Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.
-Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning.">
+ Table of Contents  Architecture   Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://zhanghanduo.github.io/post/attention/">
@@ -280,7 +280,7 @@ Sequence-to-sequence models are deep learning models that have achieved a lot of
   <meta property="og:url" content="https://zhanghanduo.github.io/post/attention/">
   <meta property="og:title" content="Seq2seq Model with Attention | Zhang Handuo&#39;s Site">
   <meta property="og:description" content="Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.
-Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."><meta property="og:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg">
+ Table of Contents  Architecture   Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."><meta property="og:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg">
   <meta property="twitter:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg"><meta property="og:locale" content="en-us">
   
     
@@ -334,7 +334,7 @@ Sequence-to-sequence models are deep learning models that have achieved a lot of
       "url": "https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.\nSequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."
+  "description": "Digested and reproduced from Visualizing A Neural Machine Translation Model by Jay Alammar.\n Table of Contents  Architecture   Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning."
 }
 </script>
 
@@ -747,18 +747,26 @@ Sequence-to-sequence models are deep learning models that have achieved a lot of
   <div class="article-container">
 
     <div class="article-style">
-      <p>Digested and reproduced from <a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Visualizing A Neural Machine Translation Model</a> by Jay Alammar.</p>
+      <blockquote>
+<p>Digested and reproduced from <a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Visualizing A Neural Machine Translation Model</a> by Jay Alammar.</p>
+</blockquote>
+<h2>Table of Contents</h2>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#architecture">Architecture</a></li>
+  </ul>
+</nav>
 <p>Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. 
 <a href="https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/" target="_blank" rel="noopener">Google Translate</a> started  using such a model in production in late 2016. These models are explained in the two pioneering papers (
 <a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf" target="_blank" rel="noopener">Sutskever et al., 2014</a>, 
 <a href="http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf" target="_blank" rel="noopener">Cho et al., 2014</a>).</p>
 <p>A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items.</p>
 <p>In neural machine translation, a sequence is a series of words, processed one after another. The output is, likewise, a series of words:</p>
-<!-- <video width="100%" height="auto" loop autoplay controls>
-  <source src="/img/seq/seq2seq_2.mp4" type="video/mp4">
+<video width="100%" height="auto" loop autoplay controls>
+  <source src="seq2seq_2.mp4" type="video/mp4">
   Your browser does not support the video tag.
-</video> -->
-
+</video>
+<!-- 
 
 
 
@@ -775,7 +783,7 @@ Sequence-to-sequence models are deep learning models that have achieved a lot of
 
 <video controls >
   <source src="seq2seq_2.mp4" type="video/mp4">
-</video>
+</video> -->
 <h2 id="architecture">Architecture</h2>
 <p>The model is composed of an <span class="markup-quote">encoder</span> and a <span class="markup-quote">decoder</span>. The <span class="markup-quote">encoder</span> processes each item in the input sequence and compiles the information into a vector (called the <span class="markup-quote">context</span> ). After processing the input sequence, the <span class="markup-quote">encoder</span> sends the <span class="markup-quote">context</span> over to the <span class="markup-quote">decoder</span> , which produces the output sequence item by item.</p>
 
