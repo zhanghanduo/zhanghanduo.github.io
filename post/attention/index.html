@@ -744,9 +744,9 @@ Sequence-to-sequence models are deep learning models that have achieved a lot of
   <div class="article-container">
 
     <div class="article-style">
-      <p><span class="discussion">Digested and reproduced from <a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Visualizing A Neural Machine Translation Model</a> by Jay Alammar.</span></p>
-<p>Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
-<a href="https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/" target="_blank" rel="noopener">using</a> such a model in production in late 2016. These models are explained in the two pioneering papers (
+      <p>Digested and reproduced from <a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Visualizing A Neural Machine Translation Model</a> by Jay Alammar.</p>
+<p>Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. 
+<a href="https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/" target="_blank" rel="noopener">Google Translate</a> started such a model in production in late 2016. These models are explained in the two pioneering papers (
 <a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf" target="_blank" rel="noopener">Sutskever et al., 2014</a>, 
 <a href="http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf" target="_blank" rel="noopener">Cho et al., 2014</a>).</p>
 <p>A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items.</p>
@@ -756,7 +756,7 @@ Sequence-to-sequence models are deep learning models that have achieved a lot of
   Your browser does not support the video tag.
 </video>
 <h2 id="architecture">Architecture</h2>
-<p>The model is composed of an <span  color="green" class="encoder">encoder</span> and a <span  color="blue" class="encoder">decoder</span>. The <span  color="green" class="encoder">encoder</span> processes each item in the input sequence and compiles the information into a vector (called the <span color="red" class="context">context</span>). After processing the input sequence, the <span  color="green" class="encoder">encoder</span> sends the <span color="red" class="context">context</span> over to the <span  color="blue" class="encoder">decoder</span>, which produces the output sequence item by item.</p>
+<p>The model is composed of an <a  color="green" class="encoder">encoder</a> and a <span  color="blue" class="encoder">decoder</span>. The <span  color="green" class="encoder">encoder</span> processes each item in the input sequence and compiles the information into a vector (called the <span color="red" class="context">context</span>). After processing the input sequence, the <span  color="green" class="encoder">encoder</span> sends the <span color="red" class="context">context</span> over to the <span  color="blue" class="encoder">decoder</span>, which produces the output sequence item by item.</p>
 <video width="100%" height="auto" loop autoplay  controls>
   <source src="/img/seq/seq2seq_3.mp4" type="video/mp4">
   Your browser does not support the video tag.
