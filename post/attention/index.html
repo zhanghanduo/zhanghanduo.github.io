@@ -27,10 +27,18 @@
   
     
   
-  <meta name="description" content="YOLO has higher localization errors and the recall (measure how good to locate all objects) is lower, compared to SSD. YOLOv2 is the second version of the YOLO with the objective of improving the accuracy significantly while making it faster.">
+  <meta name="description" content="Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
+using such a model in production in late 2016. These models are explained in the two pioneering papers (
+Sutskever et al., 2014, 
+Cho et al., 2014).
+A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items. A trained model would work like this:
 
   
-  <link rel="alternate" hreflang="en-us" href="https://zhanghanduo.github.io/post/yolov2/yolo2/">
+  Your browser does not support the video tag.
+">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://zhanghanduo.github.io/post/attention/">
 
   
 
@@ -255,7 +263,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="https://zhanghanduo.github.io/post/yolov2/yolo2/">
+  <link rel="canonical" href="https://zhanghanduo.github.io/post/attention/">
 
   
   
@@ -265,24 +273,31 @@
   
   
     
-    
   
   
-  <meta property="twitter:card" content="summary">
+  <meta property="twitter:card" content="summary_large_image">
   
   <meta property="twitter:site" content="@christlurker">
   <meta property="twitter:creator" content="@christlurker">
   
   <meta property="og:site_name" content="Zhang Handuo&#39;s Site">
-  <meta property="og:url" content="https://zhanghanduo.github.io/post/yolov2/yolo2/">
-  <meta property="og:title" content="You only look once (YOLO) -- (2) | Zhang Handuo&#39;s Site">
-  <meta property="og:description" content="YOLO has higher localization errors and the recall (measure how good to locate all objects) is lower, compared to SSD. YOLOv2 is the second version of the YOLO with the objective of improving the accuracy significantly while making it faster."><meta property="og:image" content="https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
-  <meta property="twitter:image" content="https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  <meta property="og:url" content="https://zhanghanduo.github.io/post/attention/">
+  <meta property="og:title" content="Seq2seq Model with Attention | Zhang Handuo&#39;s Site">
+  <meta property="og:description" content="Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
+using such a model in production in late 2016. These models are explained in the two pioneering papers (
+Sutskever et al., 2014, 
+Cho et al., 2014).
+A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items. A trained model would work like this:
+
+  
+  Your browser does not support the video tag.
+"><meta property="og:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg">
+  <meta property="twitter:image" content="https://zhanghanduo.github.io/post/attention/featured.jpg"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2018-08-20T16:21:12&#43;08:00">
+      <meta property="article:published_time" content="2020-06-01T12:58:12&#43;08:00">
     
-    <meta property="article:modified_time" content="2018-08-20T16:21:12&#43;08:00">
+    <meta property="article:modified_time" content="2020-06-01T12:58:12&#43;08:00">
   
 
   
@@ -306,17 +321,16 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://zhanghanduo.github.io/post/yolov2/yolo2/"
+    "@id": "https://zhanghanduo.github.io/post/attention/"
   },
-  "headline": "You only look once (YOLO) -- (2)",
+  "headline": "Seq2seq Model with Attention",
   
-  "datePublished": "2018-08-20T16:21:12+08:00",
-  "dateModified": "2018-08-20T16:21:12+08:00",
+  "image": [
+    "https://zhanghanduo.github.io/post/attention/featured.jpg"
+  ],
   
-  "author": {
-    "@type": "Person",
-    "name": "Handuo"
-  },
+  "datePublished": "2020-06-01T12:58:12+08:00",
+  "dateModified": "2020-06-01T12:58:12+08:00",
   
   "publisher": {
     "@type": "Organization",
@@ -326,7 +340,7 @@
       "url": "https://zhanghanduo.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "YOLO has higher localization errors and the recall (measure how good to locate all objects) is lower, compared to SSD. YOLOv2 is the second version of the YOLO with the objective of improving the accuracy significantly while making it faster."
+  "description": "\u003cp\u003eSequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started \n\u003ca href=\"https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/\" target=\"_blank\" rel=\"noopener\"\u003eusing\u003c/a\u003e such a model in production in late 2016. These models are explained in the two pioneering papers (\n\u003ca href=\"https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf\" target=\"_blank\" rel=\"noopener\"\u003eSutskever et al., 2014\u003c/a\u003e, \n\u003ca href=\"http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf\" target=\"_blank\" rel=\"noopener\"\u003eCho et al., 2014\u003c/a\u003e).\u003c/p\u003e\n\u003cp\u003eA sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images\u0026hellip;etc) and outputs another sequence of items. A trained model would work like this:\n\u003cvideo width=\"100%\" height=\"auto\" loop autoplay controls\u003e\u003c/p\u003e\n  \u003csource src=\"/img/seq/seq2seq_1.mp4\" type=\"video/mp4\"\u003e\n  Your browser does not support the video tag.\n\u003c/video\u003e"
 }
 </script>
 
@@ -344,7 +358,7 @@
 
 
 
-  <title>You only look once (YOLO) -- (2) | Zhang Handuo&#39;s Site</title>
+  <title>Seq2seq Model with Attention | Zhang Handuo&#39;s Site</title>
 
 </head>
 
@@ -648,7 +662,7 @@
   
   
 <div class="article-container pt-3">
-  <h1>You only look once (YOLO) -- (2)</h1>
+  <h1>Seq2seq Model with Attention</h1>
 
   
 
@@ -660,16 +674,6 @@
 
   
   
-  
-  
-  <div>
-    
-
-  
-  <span><a href="/author/handuo/">Handuo</a></span>
-  </div>
-  
-  
 
   
   <span class="article-date">
@@ -677,7 +681,7 @@
     
       
     
-    Aug 20, 2018
+    Jun 1, 2020
   </span>
   
 
@@ -686,7 +690,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    2 min read
+    1 min read
   </span>
   
 
@@ -698,7 +702,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/category/object-detection/">Object Detection</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/category/deep-learning-basics/">Deep Learning Basics</a></span>
   
 
 </div>
@@ -726,27 +730,21 @@
   <div class="article-container">
 
     <div class="article-style">
-      <p>YOLO has higher localization errors and the recall (measure how good to locate all objects) is lower, compared to SSD. YOLOv2 is the second version of the YOLO with the objective of improving the accuracy significantly while making it faster.</p>
-<p>The backbone network architecture of YOLO v2 is as follows:
-<img src="/img/yolo/yolo2_net.jpg" alt="Yolo2 Backbone"></p>
-<h2 id="1-accuracy-improvements">1. Accuracy Improvements</h2>
-<h3 id="batch-normalization">Batch Normalization</h3>
-<p>Also removes the need of dropouts. mAP increases by 2%.</p>
-<h3 id="high-resolution-classifier">High-resolution Classifier</h3>
-<p>To generate predictions with shape of $7\times 7 \times 125$, we replace the final fully connected layers with a  $3\times 3$ <code>convolution layer</code> each outputting 1024 output channels. Then we apply a final $1\times 1$ convolutional layer to convert the $7\times 7 \times 1024$ output into $7\times 7 \times 125$ and retrain it end-to-end. This makes training easier and moves mAP up by 4%.</p>
-<h3 id="convolution-with-anchor-boxes">Convolution with Anchor Boxes</h3>
-<p>Early training is susceptible to unstable gradients. Arbitrary guesses on the boundary boxes may result in steep gradient changes.</p>
-<p>In real life, boudnary boxes are not arbitrary. So the author create 5 <strong>anchor</strong> boxes with the following shapes.</p>
-<p><img src="/img/yolo/anchor_box.jpeg" alt="5 anchor boxes"></p>
-<p>Instead of directly predicting 5 arbitrary boundary boxes, we predict offsdets to each of the anchor boxes. If we <strong>constrain</strong> the offset values, we can maintain the diversity of the predictions and have each prediction focusing on specific shape. So the initial training will be more stable.</p>
-<h3 id="dimension-clusters">Dimension Clusters</h3>
-<p>In many problem domains, the boundary boxes have strong patterns. For example, in the autonomous driving, the 2 most common boundary boxes will be cars and pedestrians at different distances. To identify the top-K boundary boxes that have the best coverage for the training data, we run K-means clustering on the training data to locate the centroids of the top-K clusters.</p>
-<p>Since we are dealing with boundary boxes rather than points, we cannot use the regular spatial distance to measure datapoint distances. No surprise, we use IoU.</p>
-<h3 id="direct-location-prediction">Direct location prediction</h3>
-<p>We make predictions on the offsets to the anchors. Nevertheless, if it is unconstrained, our guesses will be randomized again. YOLO predicts 5 parameters (tx, ty, tw, th, and to) and applies the sigma function to constraint its possible offset range.</p>
-<p><img src="/img/yolo/yolo2_location_predict.jpeg" alt="Location prediction on anchors"></p>
-<p>With the use of k-means clustering (dimension clusters) and the improvement mentioned in this section, mAP increases 5%.</p>
-
+      <p>Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
+<a href="https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/" target="_blank" rel="noopener">using</a> such a model in production in late 2016. These models are explained in the two pioneering papers (
+<a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf" target="_blank" rel="noopener">Sutskever et al., 2014</a>, 
+<a href="http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf" target="_blank" rel="noopener">Cho et al., 2014</a>).</p>
+<p>A sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images&hellip;etc) and outputs another sequence of items. A trained model would work like this:
+<video width="100%" height="auto" loop autoplay controls></p>
+  <source src="/img/seq/seq2seq_1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p><br /></p>
+<p>In neural machine translation, a sequence is a series of words, processed one after another. The output is, likewise, a series of words:</p>
+<video width="100%" height="auto" loop autoplay controls>
+  <source src="/img/seq/seq2seq_2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
     </div>
 
     
@@ -776,7 +774,7 @@
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://zhanghanduo.github.io/post/yolov2/yolo2/&amp;text=You%20only%20look%20once%20%28YOLO%29%20--%20%282%29" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://zhanghanduo.github.io/post/attention/&amp;text=Seq2seq%20Model%20with%20Attention" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -789,7 +787,7 @@
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://zhanghanduo.github.io/post/yolov2/yolo2/&amp;t=You%20only%20look%20once%20%28YOLO%29%20--%20%282%29" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://zhanghanduo.github.io/post/attention/&amp;t=Seq2seq%20Model%20with%20Attention" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -802,7 +800,7 @@
       
       
       <li>
-        <a href="mailto:?subject=You%20only%20look%20once%20%28YOLO%29%20--%20%282%29&amp;body=https://zhanghanduo.github.io/post/yolov2/yolo2/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Seq2seq%20Model%20with%20Attention&amp;body=https://zhanghanduo.github.io/post/attention/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -815,7 +813,7 @@
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://zhanghanduo.github.io/post/yolov2/yolo2/&amp;title=You%20only%20look%20once%20%28YOLO%29%20--%20%282%29" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://zhanghanduo.github.io/post/attention/&amp;title=Seq2seq%20Model%20with%20Attention" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -828,7 +826,7 @@
       
       
       <li>
-        <a href="whatsapp://send?text=You%20only%20look%20once%20%28YOLO%29%20--%20%282%29%20https://zhanghanduo.github.io/post/yolov2/yolo2/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=Seq2seq%20Model%20with%20Attention%20https://zhanghanduo.github.io/post/attention/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -841,7 +839,7 @@
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://zhanghanduo.github.io/post/yolov2/yolo2/&amp;title=You%20only%20look%20once%20%28YOLO%29%20--%20%282%29" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://zhanghanduo.github.io/post/attention/&amp;title=Seq2seq%20Model%20with%20Attention" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -861,17 +859,152 @@
 
 
   
-    
-    
+  
 
 
 
 
 
   
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-circle" src="/author/avatar_hu719473944e5fc214027c554540953267_304543_270x270_fill_q90_lanczos_center.jpg" alt="">
+      
 
-
+      <div class="media-body">
+        <h5 class="card-title"><a href="https://zhanghanduo.github.io/"></a></h5>
+        <h6 class="card-subtitle">PhD Student of Robot Vison and Localization</h6>
+        <p class="card-text">My research interests include Robotics visioin, visual SLAM, object detection and sensor fusion with the assis of AI.</p>
+        <ul class="network-icon" aria-hidden="true">
   
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="weixin://dl/chat?%7bhanduo8997%7d" >
+        <i class="fab fa-weixin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/christlurker" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://t.me/christlurker" target="_blank" rel="noopener">
+        <i class="fab fa-telegram"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com.sg/citations?user=je6o_J4AAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zhanghanduo" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/handuo_resume_.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
 
 
 
@@ -888,11 +1021,11 @@
     <h3>Related</h3>
     <ul>
       
+      <li><a href="/post/yolov2/">You only look once (YOLO) -- (2)</a></li>
+      
       <li><a href="/post/yolo1/">You only look once (YOLO) -- (1)</a></li>
       
       <li><a href="/post/pooling/">Pooling Layer in CNN (1)</a></li>
-      
-      <li><a href="/post/attention/attention/">Seq2seq Model with Attention</a></li>
       
     </ul>
   </div>

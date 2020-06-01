@@ -14,9 +14,9 @@
     
     <item>
       <title>Seq2seq Model with Attention</title>
-      <link>https://zhanghanduo.github.io/post/attention/attention/</link>
+      <link>https://zhanghanduo.github.io/post/attention/</link>
       <pubDate>Mon, 01 Jun 2020 12:58:12 +0800</pubDate>
-      <guid>https://zhanghanduo.github.io/post/attention/attention/</guid>
+      <guid>https://zhanghanduo.github.io/post/attention/</guid>
       <description>&lt;p&gt;Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
 &lt;a href=&#34;https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;using&lt;/a&gt; such a model in production in late 2016. These models are explained in the two pioneering papers (
 &lt;a href=&#34;https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sutskever et al., 2014&lt;/a&gt;, 

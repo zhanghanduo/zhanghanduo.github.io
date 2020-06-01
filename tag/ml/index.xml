@@ -14,9 +14,9 @@
     
     <item>
       <title>Seq2seq Model with Attention</title>
-      <link>https://zhanghanduo.github.io/post/attention/attention/</link>
+      <link>https://zhanghanduo.github.io/post/attention/</link>
       <pubDate>Mon, 01 Jun 2020 12:58:12 +0800</pubDate>
-      <guid>https://zhanghanduo.github.io/post/attention/attention/</guid>
+      <guid>https://zhanghanduo.github.io/post/attention/</guid>
       <description>&lt;p&gt;Sequence-to-sequence models are deep learning models that have achieved a lot of success in tasks like machine translation, text summarization, and image captioning. Google Translate started 
 &lt;a href=&#34;https://blog.google/products/translate/found-translation-more-accurate-fluent-sentences-google-translate/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;using&lt;/a&gt; such a model in production in late 2016. These models are explained in the two pioneering papers (
 &lt;a href=&#34;https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sutskever et al., 2014&lt;/a&gt;, 
@@ -36,9 +36,9 @@
     
     <item>
       <title>You only look once (YOLO) -- (2)</title>
-      <link>https://zhanghanduo.github.io/post/yolov2/yolo2/</link>
+      <link>https://zhanghanduo.github.io/post/yolov2/</link>
       <pubDate>Mon, 20 Aug 2018 16:21:12 +0800</pubDate>
-      <guid>https://zhanghanduo.github.io/post/yolov2/yolo2/</guid>
+      <guid>https://zhanghanduo.github.io/post/yolov2/</guid>
       <description>&lt;p&gt;YOLO has higher localization errors and the recall (measure how good to locate all objects) is lower, compared to SSD. YOLOv2 is the second version of the YOLO with the objective of improving the accuracy significantly while making it faster.&lt;/p&gt;
 &lt;p&gt;The backbone network architecture of YOLO v2 is as follows:
 &lt;img src=&#34;https://zhanghanduo.github.io/img/yolo/yolo2_net.jpg&#34; alt=&#34;Yolo2 Backbone&#34;&gt;&lt;/p&gt;
